@@ -70,7 +70,7 @@ const Register = () => {
         <div className="hero" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${registerBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         
         <Helmet>
-                <title>Register | ArtNest</title>
+                <title>Register | RestY</title>
         </Helmet>
 
             <div className="hero-content flex-col w-[400px] md:w-[500px] animate__animated animate__zoomIn ">

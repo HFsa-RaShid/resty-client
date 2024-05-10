@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState} from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import 'animate.css';
-
+import logo from '../../assets/image/logo.png'
 import { Tooltip } from 'react-tooltip'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -44,8 +44,8 @@ const Navbar = () => {
 
 
     return (
-        <div className="sticky top-0 z-50  shadow-2xl bg-black">
-            <div className="navbar container mx-auto text-white">
+        <div className="sticky top-0 z-50  shadow-2xl bg-black ">
+            <div className="navbar container mx-auto text-white ">
             <div className="navbar-start ">
               <div className="dropdown ">
                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
@@ -58,7 +58,7 @@ const Navbar = () => {
                         } to='/'>Home</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/allArt'>Rooms</NavLink></li>
+                        } to='/rooms'>Rooms</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
                         } to='/addCraft'>My Bookings</NavLink></li>
@@ -74,7 +74,7 @@ const Navbar = () => {
 
               </div>
               <div className=" animate__animated animate__fadeInLeft">
-              <h1 className=" font-bold text-[18px] "><span className="text-3xl font-bold bg-white text-black">Art</span>Nest</h1>
+                        <img src={logo} className="w-[70px] h-[50px]" />
 
               </div>
             </div>
@@ -85,7 +85,7 @@ const Navbar = () => {
                         } to='/'>Home</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/allArt'>Rooms</NavLink></li>
+                        } to='/rooms'>Rooms</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
                         } to='/addCraft'>My Bookings</NavLink></li>

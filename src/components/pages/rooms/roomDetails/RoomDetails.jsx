@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
@@ -26,7 +26,14 @@ const RoomDetails = () => {
         if (room.availability) {
             Swal.fire({
                 title: 'Booking Confirmation',
-                text: 'Are you sure you want to book this room?',
+                
+                html: 
+                   `Room Description: ${room.description}<br>
+                   Price per Night: ${room.pricePerNight}<br>
+                   Room Size: ${room.roomSize}<br>
+                   Special Offers: ${room.specialOffer}<br><br>
+                   Are you sure you want to book this room?`,
+                
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, book it!',
@@ -39,7 +46,7 @@ const RoomDetails = () => {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            roomId: id,
+                            room: room,
                             userEmail: user.email,
                             selectedDate: startDate.toISOString()
                         })
@@ -47,7 +54,7 @@ const RoomDetails = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
-                            // Update availability in the database
+                            
                             fetch(`http://localhost:5000/allrooms/${id}`, {
                                 method: 'PUT',
                                 headers: {
@@ -110,3 +117,132 @@ const RoomDetails = () => {
 };
 
 export default RoomDetails;
+// import { useContext, useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import DatePicker from "react-datepicker";
+// import Swal from "sweetalert2";
+// import { AuthContext } from "../../../../provider/AuthProvider";
+
+// import "react-datepicker/dist/react-datepicker.css";
+
+// const RoomDetails = () => {
+//     const { user } = useContext(AuthContext);
+//     const { id } = useParams();
+//     const [room, setRoom] = useState({});
+//     const [startDate, setStartDate] = useState(new Date());
+//     const [isModalOpen, setIsModalOpen] = useState(false);
+
+//     useEffect(() => {
+//         fetch(`http://localhost:5000/allrooms/${id}`)
+//             .then(res => res.json())
+//             .then(data => {
+//                 setRoom(data);
+//             })
+//             .catch(error => {
+//                 console.error('Error fetching room details:', error);
+//             });
+//     }, [id]);
+
+//     const openModal = () => {
+//         setIsModalOpen(true);
+//     };
+
+//     const closeModal = () => {
+//         setIsModalOpen(false);
+//     };
+
+//     const handleBookNow = () => {
+//         if (room.availability) {
+//             openModal();
+//         } else {
+//             Swal.fire('Room Unavailable', 'This room is already booked.', 'error');
+//         }
+//     };
+
+//     const handleConfirmBooking = () => {
+//         fetch(`http://localhost:5000/bookings`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 room: room,
+//                 userEmail: user.email,
+//                 selectedDate: startDate.toISOString()
+//             })
+//         })
+//         .then(res => res.json())
+//         .then(data => {
+//             if (data.success) {
+//                 fetch(`http://localhost:5000/allrooms/${id}`, {
+//                     method: 'PUT',
+//                     headers: {
+//                         'Content-Type': 'application/json'
+//                     },
+//                     body: JSON.stringify({
+//                         availability: false
+//                     })
+//                 })
+//                 .then(res => res.json())
+//                 .then(data => {
+//                     if (data.success) {
+//                         setRoom(prevRoom => ({
+//                             ...prevRoom,
+//                             availability: false
+//                         }));
+//                         Swal.fire('Success!', 'Room booked successfully.', 'success');
+//                     } else {
+//                         Swal.fire('Error', 'Failed to update availability.', 'error');
+//                     }
+//                 })          
+//             } else {
+//                 Swal.fire('Error', 'Failed to book room.', 'error');
+//             }
+//         });
+//         closeModal();
+//     };
+
+//     return (
+//         <div className="my-10">
+//             <div className="flex gap-10">
+//                 <div className="w-[45%] ">
+//                     <img src={room.image} className="w-[90%] h-[500px] mx-auto" alt="Room" />
+//                 </div>
+//                 <div className="w-[55%] ">
+//                     <h1>{room.description}</h1>
+//                     <p>Price per Night: ${room.pricePerNight}</p>
+//                     <p>Room Size: {room.roomSize}</p>
+//                     <p>Availability: {room.availability ? 'Available' : 'Not Available'}</p>
+//                     <p>Special Offers: {room.specialOffer}</p>
+//                     <DatePicker 
+//                         selected={startDate} 
+//                         onChange={(date) => setStartDate(date)} 
+//                         className="border border-black"
+//                     />
+//                     <div>
+//                         <button onClick={handleBookNow}>Book Now</button>
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Daisy UI Modal */}
+//             {isModalOpen && (
+//                 <dialog id="my_modal_3" className="modal " open>
+//                     <div className="modal-box">
+//                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
+//                         <h3 className="font-bold text-lg">Booking Confirmation</h3>
+//                         <p>Are you sure you want to book this room?</p>
+//                         <p>Are you sure you want to book this room?</p>
+//                         <p>Are you sure you want to book this room?</p>
+//                         <p>Are you sure you want to book this room?</p>
+//                         <button className="btn" onClick={handleConfirmBooking}>Yes, book it!</button>
+//                         <button className="btn" onClick={closeModal}>No, cancel</button>
+//                     </div>
+//                 </dialog>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default RoomDetails;
+

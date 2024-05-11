@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 
 const MyBookings = () => {
@@ -10,11 +11,11 @@ const MyBookings = () => {
 
     useEffect(() => {
         setLoading(true); 
-        fetch(`http://localhost:5000/bookings/${user?.email}`)
+        fetch(`http://localhost:5000/myBookings/${user?.email}`)
         .then((res) => res.json())
         .then(data => {
             setItems(data);
-            console.log(data)
+            console.log(data);
             setLoading(false); 
         })
         .catch(error => {
@@ -23,17 +24,35 @@ const MyBookings = () => {
         });
     }, [user, control]);
     return (
-        <div>
-            {
-                items.map(allrooms => (
-                    
-                           <div key={allrooms._id}>
-                            <p>{allrooms._id}</p>
-                           </div>
+        <div className="container mx-auto my-10">
+            {loading ? (
+                <div className="flex justify-center items-center h-screen ">
+                    <span className="loading loading-spinner loading-lg"></span>
+                </div>
+            ) : (
+                <div className="px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 fonts container mx-auto">
+                    {
+                        items.map(item => (
+
+                            <div key={item._id} className="card  bg-base-100 shadow-xl">
+                            <figure><img src={item.room.image} className="w-full h-[260px]"/></figure>
+                            <div className="card-body">
+                              <h2 className="card-title"></h2>
+                              <p>If a dog chews shoes whose shoes does he choose?</p>
+                              <div className="card-actions justify-end">
+                                <button className="btn btn-primary">Buy Now</button>
+                              </div>
+                            </div>
+                          </div>  
+                                
+                                    
+                                
+                                    
+                        ))
                             
-                ))
-                      
-            }
+                    }
+                </div>
+            )}
         </div>
     );
 };

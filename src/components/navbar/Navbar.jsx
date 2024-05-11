@@ -61,7 +61,7 @@ const Navbar = () => {
                         } to='/rooms'>Rooms</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/myBookings'>My Bookings</NavLink></li>
+                        } to='/bookings'>My Bookings</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
                         } to='/myCraft'>About Us</NavLink></li>
@@ -88,7 +88,7 @@ const Navbar = () => {
                         } to='/rooms'>Rooms</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/myBookings'>My Bookings</NavLink></li>
+                        } to='/bookings'>My Bookings</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
                         } to='/myCraft'>About Us</NavLink></li>

@@ -6,6 +6,7 @@ import Home from "../components/pages/home/Home";
 import ErrorPage from "../components/errorpage/ErrorPage";
 import AvailableRooms from "../components/pages/rooms/AvailableRooms/AvailableRooms";
 import RoomDetails from "../components/pages/rooms/roomDetails/RoomDetails";
+import MyBookings from "../components/pages/mybookings/MyBookings";
 
 
 
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
         {
           path: "/allrooms/:id",
           element: <RoomDetails></RoomDetails>,
+          
+        },
+        {
+          path: "/myBookings",
+          element: <MyBookings></MyBookings>,
           
         },
         

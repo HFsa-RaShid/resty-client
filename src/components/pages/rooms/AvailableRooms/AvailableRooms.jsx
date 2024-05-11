@@ -22,6 +22,9 @@ const AvailableRooms = () => {
             setLoading(false); 
         });
     }, [control]);
+
+
+    
     return (
         <div className="container mx-auto my-10">
              <h2 className="text-center text-3xl text-black font-bold mb-6">AVAILABLE ROOMS</h2>

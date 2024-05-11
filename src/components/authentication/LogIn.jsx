@@ -30,7 +30,7 @@ const LogIn = () => {
         signInWithPopup(auth,googleProvider)
         .then(result =>{
         const loggedInUser = result.user;
-        console.log(loggedInUser);
+        // console.log(loggedInUser);
         setUser(loggedInUser);
         toast.success('Logged In successfully');
         setTimeout(() => {
@@ -51,7 +51,7 @@ const handleGithubLogIn = () =>{
     signInWithPopup(auth,githubProvider)
     .then(result =>{
         const loggedUser = result.user;
-        console.log(loggedUser);
+        // console.log(loggedUser);
         setUser(loggedUser);
         toast.success('Logged In successfully');
         setTimeout(() => {
@@ -71,7 +71,7 @@ const handleGithubLogIn = () =>{
     const form = new FormData(e.currentTarget)
     const email = form.get('email');
     const password = form.get('password');
-    console.log(email,password);
+    // console.log(email,password);
 
     signInUser(email,password)
     .then(result =>{

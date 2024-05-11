@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
-import {  Link, useParams } from "react-router-dom";
-
-import { Helmet } from "react-helmet";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../../provider/AuthProvider";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 const RoomDetails = () => {
-    const {id} = useParams();
-    console.log(id);
-    const [allrooms,setRoom] = useState({});
-    const ImageUrl = "https://i.ibb.co/Zx9JR3q/card.jpg"
+    const { user } = useContext(AuthContext);
+    const { id } = useParams();
+    const [room, setRoom] = useState({});
+    const [startDate, setStartDate] = useState(new Date());
 
-    useEffect(() =>{
+    useEffect(() => {
         fetch(`http://localhost:5000/allrooms/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            setRoom(data)
-            console.log(data);
-        })
-    },[id])
+            .then(res => res.json())
+            .then(data => {
+                setRoom(data);
+            })
+            .catch(error => {
+                console.error('Error fetching room details:', error);
+            });
+    }, [id]);
 
     const handleBookNow = () => {
-        if (allrooms.availability) {
+        if (room.availability) {
             Swal.fire({
                 title: 'Booking Confirmation',
                 text: 'Are you sure you want to book this room?',
@@ -32,64 +33,78 @@ const RoomDetails = () => {
                 cancelButtonText: 'No, cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Update availability in the database
-                    fetch(`http://localhost:5000/allrooms/${id}`, {
-                        method: 'PUT',
+                    fetch(`http://localhost:5000/bookings`, {
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            availability: false
+                            roomId: id,
+                            userEmail: user.email,
+                            selectedDate: startDate.toISOString()
                         })
                     })
                     .then(res => res.json())
                     .then(data => {
-                        setRoom(prevState => ({
-                            ...prevState,
-                            availability: false
-                        }));
-                        Swal.fire('Success!', 'Room booked successfully.', 'success');
+                        if (data.success) {
+                            // Update availability in the database
+                            fetch(`http://localhost:5000/allrooms/${id}`, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    availability: false
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    setRoom(prevRoom => ({
+                                        ...prevRoom,
+                                        availability: false
+                                    }));
+                                    Swal.fire('Success!', 'Room booked successfully.', 'success');
+                                } else {
+                                    Swal.fire('Error', 'Failed to update availability.', 'error');
+                                }
+                            })
+                            
+                        } else {
+                            Swal.fire('Error', 'Failed to book room.', 'error');
+                        }
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire('Error', 'Failed to update availability.', 'error');
-                    });
+                    
                 }
             });
-        } 
-        else 
-        {
+        } else {
             Swal.fire('Room Unavailable', 'This room is already booked.', 'error');
         }
     };
 
-    useEffect(() => {
-        AOS.init({duration: 2000});
-    }, []);
     return (
         <div className="my-10">
             <div className="flex gap-10">
-                <div className="w-[45%]">
-                <img src={allrooms.image} className="w-[90%] h-[500px] mx-auto" />
+      
+                <div className="w-[45%] ">
+                    <img src={room.image} className="w-[90%] h-[500px] mx-auto" alt="Room" />
                 </div>
-                <div className="w-[55%]">
-                    <h1>{allrooms.description}</h1>
-                    <p>Price per Night: ${allrooms.pricePerNight}</p>
-                    <p>Room Size: {allrooms.roomSize}</p>
-                    <p>Availability: {allrooms.availability ? 'Available' : 'Not Available'}</p>
-                    <p>Special Offers: {allrooms.specialOffer}</p>
-                    <Link>
-                    <button onClick={handleBookNow}>
-                        Book Now
-                    </button>
-                    </Link>
-
-
-
+                <div className="w-[55%] ">
+                    <h1>{room.description}</h1>
+                    <p>Price per Night: ${room.pricePerNight}</p>
+                    <p>Room Size: {room.roomSize}</p>
+                    <p>Availability: {room.availability ? 'Available' : 'Not Available'}</p>
+                    <p>Special Offers: {room.specialOffer}</p>
+                    <DatePicker 
+                        selected={startDate} 
+                        onChange={(date) => setStartDate(date)} 
+                        className="border border-black"
+                    />
+                    <div>
+                    <button onClick={handleBookNow}>Book Now</button>
+                    </div>
                 </div>
-
             </div>
-            
         </div>
     );
 };

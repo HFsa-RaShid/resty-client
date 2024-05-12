@@ -7,6 +7,7 @@ import ErrorPage from "../components/errorpage/ErrorPage";
 import AvailableRooms from "../components/pages/rooms/AvailableRooms/AvailableRooms";
 import RoomDetails from "../components/pages/rooms/roomDetails/RoomDetails";
 import MyBookings from "../components/pages/mybookings/MyBookings";
+import UpdateBookingInfo from "../components/pages/mybookings/UpdateBookingInfo";
 
 
 
@@ -48,6 +49,13 @@ export const router = createBrowserRouter([
           element: <MyBookings></MyBookings>,
           
         },
+        {
+          path: "/update/:id",
+          element: <UpdateBookingInfo></UpdateBookingInfo>,
+          
+        },
+
+      
         
       ],
     },

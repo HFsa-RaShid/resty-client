@@ -44,7 +44,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="sticky top-0 z-50  shadow-2xl bg-black ">
+        <div className="sticky top-0 z-50  shadow-2xl bg-[#4D7377] ">
             <div className="navbar container mx-auto text-white ">
             <div className="navbar-start ">
               <div className="dropdown ">
@@ -156,7 +156,7 @@ const Navbar = () => {
 
                 :
                     <div className="flex gap-2 animate__animated animate__fadeInRight ">
-                      <Link to='/login'><button className="py-2 px-4 bg-black text-white rounded-xl  border border-white ">Sign In</button></Link>
+                      <Link to='/login'><button className="py-2 px-4  text-white rounded-xl  border border-white ">Sign In</button></Link>
                     
                     </div>
 

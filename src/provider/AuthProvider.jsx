@@ -66,6 +66,6 @@ const AuthProvider = ({children}) => {
 
 export default AuthProvider;
 
-AuthProvider.PropTypes ={
+AuthProvider.propTypes ={
     children: PropTypes.node
 }

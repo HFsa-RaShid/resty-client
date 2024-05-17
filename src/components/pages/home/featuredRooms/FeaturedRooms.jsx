@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { Link } from 'react-router-dom';
 
 const FeaturedRooms = () => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
-        fetch("http://localhost:5000/allrooms")
+        fetch("http://localhost:8000/allrooms")
             .then((res) => res.json())
             .then((data) => {
                 setRooms(data);
@@ -37,7 +35,7 @@ const FeaturedRooms = () => {
             navigation
             pagination={{ clickable: true }}
            
-            spaceBetween={10} // Set spaceBetween to 0 to remove space between slides
+            spaceBetween={10} 
             className="my-swiper"
                 
             >
@@ -45,11 +43,13 @@ const FeaturedRooms = () => {
                     <SwiperSlide key={item._id}>
                         <div >
                         <img src={item.image} className="relative h-[290px] w-96 bg-no-repeat " />
-                        <p className='absolute top-0 right-0'>as</p>
+                        <p className={`absolute top-0 right-0 text-white py-2 px-3 ${item.availability ? 'bg-green-600' : 'bg-red-600'}`}>
+                            {item.availability ? 'Available' : 'Unavailable'}
+                        </p>
                         </div>
                         <div className='border border-grey mb-10'>
                         <p >{item.description}</p>
-                        <button className=''>Book Now</button>
+                        <Link><button className=''>Book Now</button></Link>
                         </div>
                         
                     </SwiperSlide>

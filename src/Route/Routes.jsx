@@ -45,15 +45,16 @@ export const router = createBrowserRouter([
           
         },
         {
-          path: "/bookings",
+          path: "/myBookingsPage",
           element: <MyBookings></MyBookings>,
           
         },
         {
-          path: "/update/:id",
+          path: "/updatedInfo/:id",
           element: <UpdateBookingInfo></UpdateBookingInfo>,
           
         },
+        
 
       
         

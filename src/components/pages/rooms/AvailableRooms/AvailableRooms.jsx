@@ -11,7 +11,7 @@ const AvailableRooms = () => {
 
     useEffect(() => {
         setLoading(true); 
-        fetch("http://localhost:5000/allrooms")
+        fetch("http://localhost:8000/allrooms")
         .then((res) => res.json())
         .then(data => {
             setItems(data.filter(room => room.availability === true));

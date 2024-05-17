@@ -1,82 +1,77 @@
-import {  useEffect, useRef, useState } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const UpdateBookingInfo = () => {
-    const {id} = useParams();
-    console.log(id);
-    const [art,setArt] = useState({});
-    const [control,setControl] =useState(false);
+    const { id } = useParams();
+    const [myBookings, setMyBookings] = useState({});
+    const [control, setControl] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    useEffect(() =>{
-        fetch(`https://art-nest-server.vercel.app/arts/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            setArt(data);
-            setControl(data);
-            // console.log(data);
-        })
-    },[id,control])
+    useEffect(() => {
+        
+        fetch(`http://localhost:8000/myBookings/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                setMyBookings(data);
+                // setControl(data);
+                console.log('Received data:', data);
+            })
+            .catch(error => console.error('Error fetching data:', error)); 
+    }, [id]);
 
     const formRef = useRef(null);
-    const handleUpdate = e =>{
+    const handleUpdate = e => {
         e.preventDefault();
-        const form = e.target;
-        const image_url = form.image_url.value;
-        
-        const updatedArt = {image_url};
-        console.log(updatedArt);
+        const updatedDate = { selectedDate };
+        // console.log(`Fetching data for booking ID: ${id}`); 
 
-        // send data to the server
-        fetch(`https://art-nest-server.vercel.app/arts/${art._id}`,{
+        fetch(`http://localhost:8000/myBookings/${id}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
-
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(updatedArt)
+            body: JSON.stringify(updatedDate),
         })
-        .then(res => res.json())
-        .then(data =>{
-            // console.log(data);
-            if(data.modifiedCount > 0){
-                setControl(!control)
-                Swal.fire({
-                    title: "Success!",
-                    text: "Art Updated Successfully",
-                    icon: "success"
-                  })
-                  formRef.current.reset();
-            }
-            else{
-                Swal.fire({
-                    title: "Sorry!",
-                    text: "Please Try Again",
-                    icon: "error"
-                  })
-            }
-           
-
-        })
-    }
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    setControl(!control);
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Booking Updated Successfully",
+                        icon: "success"
+                    });
+                    formRef.current.reset();
+                } else {
+                    Swal.fire({
+                        title: "Sorry!",
+                        text: "Please Try Again",
+                        icon: "error"
+                    });
+                }
+            })
+            .catch(error => console.error('Error updating data:', error)); // Catch fetch errors
+    };
 
     return (
-        <div>
-            <form ref={formRef} onSubmit={handleUpdate} className='h-[550px] bg-red-400 w-[50%] mx-auto'>
-                <div>
-                    <label htmlFor="datePicker">Select Date:</label>
-                    <DatePicker
-                        id="datePicker"
-                        selected={selectedDate}
-                        onChange={date => setSelectedDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                    />
+        <div className='my-20'>
+            <form ref={formRef} onSubmit={handleUpdate}  className='h-[200px] w-[50%] mx-auto border'>
+                <div className='p-20'>
+                    <div className='mb-6'>
+                        <label htmlFor="datePicker" className='mr-6'>Select Date:</label>
+                        <DatePicker
+                            id="datePicker"
+                            className='border border-black'
+                            selected={selectedDate}
+                            onChange={date => setSelectedDate(date)}
+                            dateFormat="yyyy-MM-dd"
+                        />
+                    </div>
+                    <button type="submit">Update Date</button>
                 </div>
-                <button type="submit">Update Date</button>
             </form>
         </div>
     );

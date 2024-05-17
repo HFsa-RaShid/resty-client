@@ -1,104 +1,3 @@
-// import { useContext, useEffect, useState } from "react";
-// import { AuthContext } from "../../../provider/AuthProvider";
-// import Swal from "sweetalert2";
-// import { Link } from "react-router-dom";
-
-// const MyBookings = () => {
-//     const { user } = useContext(AuthContext) || {};
-//     const [items, setItems] = useState([]);
-//     const [loading, setLoading] = useState(true);
-//     const [control, setControl] = useState(false);
- 
-
-//     useEffect(() => {
-//         setLoading(true); 
-//         fetch(`http://localhost:5000/myBookings/${user?.email}`)
-//         .then((res) => res.json())
-//         .then(data => {
-//             setItems(data);
-//             setLoading(false); 
-//         })
-//     }, [user, control]);
-
-//     // cancel booking
-
-//     const handleDelete = _id =>{
-//         Swal.fire({
-//             title: "Are you sure?",
-//             text: "You won't be able to revert this!",
-//             icon: "warning",
-//             showCancelButton: false,
-//             showCloseButton: true, 
-//             confirmButtonColor: "#3085d6",
-//             cancelButtonColor: "#d33",
-//             confirmButtonText: "Yes, Cancel Booking!",
-//             customClass: {
-//                 closeButton: 'custom-close-button' 
-//             }
-//         }).then((result) => {
-//             if (result.isConfirmed) {
-//                 fetch(`http://localhost:5000/allrooms/${_id}`,{
-//                     method: 'DELETE'
-//                 })
-//                 .then( res => res.json())
-//                 .then(data =>{
-//                     if(data.deletedCount > 0){
-                        
-//                         Swal.fire({
-//                             title: "Deleted!",
-//                             text: "Your Art has been deleted.",
-//                             icon: "success"
-//                         });
-//                         setControl(!control);
-
-//                     }
-//                 });
-//             }
-//         });
-//     };
-
-
-//     return (
-//         <div className="container mx-auto my-10">
-//             {loading ? (
-//                 <div className="flex justify-center items-center h-screen ">
-//                     <span className="loading loading-spinner loading-lg"></span>
-//                 </div>
-//             ) : (
-//                 <div className="px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 fonts container mx-auto">
-//                     {
-//                         items.map(item => (
-
-//                             <div key={item._id} className="card  bg-base-100 shadow-xl">
-//                             <figure><img src={item.room.image} className="w-full h-[260px]"/></figure>
-//                             <div className="card-body">
-//                               <h2 className="card-title"></h2>
-//                               <p>{item.room.description} </p>
-//                               <p>{item.selectedDate} </p>
-//                               <Link to={`/update/${item._id}`}><button className="w-full bg-slate-700 hover:bg-slate-500 text-white py-2 rounded-xl">Update</button></Link>
-                              
-//                               <button onClick={() => handleDelete(item._id)} className="w-full bg-slate-700 hover:bg-slate-500 text-white py-2 rounded-xl">Cancel</button>
-                            
-                             
-                             
-//                                 <button className="">Post Review</button>
-                              
-//                             </div>
-//                           </div>  
-                                
-                                    
-                                
-                                    
-//                         ))
-                            
-//                     }
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default MyBookings;
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
@@ -112,7 +11,7 @@ const MyBookings = () => {
 
     useEffect(() => {
         setLoading(true); 
-        fetch(`http://localhost:5000/myBookings/${user?.email}`)
+        fetch(`http://localhost:8000/myBookings/email/${user?.email}`)
         .then((res) => res.json())
         .then(data => {
             setItems(data);
@@ -136,23 +35,45 @@ const MyBookings = () => {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/allrooms/${_id}`, {
-                    method: 'DELETE'
+                fetch(`http://localhost:8000/myBookings/${_id}`, {
+                    method: 'DELETE',
+                    body: JSON.stringify({ email: user.email }), 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.deletedCount > 0) {
+                    if (data.success) {
                         Swal.fire({
-                            title: "Deleted!",
-                            text: "Your Art has been deleted.",
+                            title: "Canceled!",
+                            text: "Your booking has been cancelled.",
                             icon: "success"
                         });
                         setControl(!control);
+                        fetch(`http://localhost:8000/allrooms/${_id}`, {
+                            method: 'PUT', 
+                            body: JSON.stringify({ availability: true }), 
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        
+                        
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Failed to cancel booking.",
+                            icon: "error"
+                        });
                     }
-                });
+                })
+                
             }
         });
     };
+    
+
 
     return (
         <div className="container mx-auto my-10">
@@ -185,9 +106,12 @@ const MyBookings = () => {
                                             Price: ${item.room.pricePerNight}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 ">{item.selectedDate}</td>
+                                    <td className="px-6 py-4 ">
+                                    {new Date(item.selectedDate).toLocaleDateString()}
+                                        {/* {item.selectedDate} */}
+                                        </td>
                                     <td className="px-6 py-4 font-bold">
-                                        <Link to={`/update/${item._id}`} className="text-blue-600 hover:text-blue-800">Update</Link>
+                                    <Link to={`/updatedInfo/${item._id}`}><button className="ml-4 text-blue-600 hover:text-blue-800">Update</button></Link>
                                         <button onClick={() => handleDelete(item._id)} className="ml-4 text-red-800 hover:text-red-900">Cancel</button>
                                         <button className="ml-4 text-blue-600 hover:text-blue-800">Post Review</button>
                                     </td>
@@ -202,4 +126,3 @@ const MyBookings = () => {
 };
 
 export default MyBookings;
-

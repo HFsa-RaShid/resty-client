@@ -12,7 +12,7 @@ const RoomDetails = () => {
     const [startDate, setStartDate] = useState(new Date());
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allrooms/${id}`)
+        fetch(`http://localhost:8000/allrooms/${id}`)
             .then(res => res.json())
             .then(data => {
                 setRoom(data);
@@ -40,7 +40,7 @@ const RoomDetails = () => {
                 cancelButtonText: 'No, cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:5000/bookings`, {
+                    fetch(`http://localhost:8000/myBookings`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const RoomDetails = () => {
                     .then(data => {
                         if (data.success) {
                             
-                            fetch(`http://localhost:5000/allrooms/${id}`, {
+                            fetch(`http://localhost:8000/allrooms/${id}`, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -106,6 +106,7 @@ const RoomDetails = () => {
                         selected={startDate} 
                         onChange={(date) => setStartDate(date)} 
                         className="border border-black"
+                        dateFormat="yyyy-MM-dd"
                     />
                     <div>
                     <button onClick={handleBookNow}>Book Now</button>

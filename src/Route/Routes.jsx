@@ -8,6 +8,7 @@ import AvailableRooms from "../components/pages/rooms/AvailableRooms/AvailableRo
 import RoomDetails from "../components/pages/rooms/roomDetails/RoomDetails";
 import MyBookings from "../components/pages/mybookings/MyBookings";
 import UpdateBookingInfo from "../components/pages/mybookings/UpdateBookingInfo";
+import ReviewForRoom from "../components/pages/rooms/reviewForRoom/ReviewForRoom";
 
 
 
@@ -52,6 +53,11 @@ export const router = createBrowserRouter([
         {
           path: "/updatedInfo/:id",
           element: <UpdateBookingInfo></UpdateBookingInfo>,
+          
+        },
+        {
+          path: "/reviewForRoom/:roomNo",
+          element: <ReviewForRoom></ReviewForRoom>,
           
         },
         

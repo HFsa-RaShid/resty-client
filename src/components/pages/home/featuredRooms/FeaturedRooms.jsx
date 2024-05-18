@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
+import { MdLocalOffer } from "react-icons/md";
 
 const FeaturedRooms = () => {
     const [rooms, setRooms] = useState([]);
@@ -15,7 +16,8 @@ const FeaturedRooms = () => {
         fetch("http://localhost:8000/allrooms")
             .then((res) => res.json())
             .then((data) => {
-                setRooms(data);
+                const filteredRooms = data.filter(room => room.specialOffer !== "No special offer available");
+                setRooms(filteredRooms);
                 setLoading(false); 
             })
             .catch((error) => {
@@ -34,12 +36,12 @@ const FeaturedRooms = () => {
             
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             
-            slidesPerView={5}
+            slidesPerView={3}
             
             navigation
             pagination={{ clickable: true }}
            
-            spaceBetween={10} 
+            spaceBetween={30} 
             className="my-swiper"
                 
             >
@@ -47,13 +49,17 @@ const FeaturedRooms = () => {
                     <SwiperSlide key={item._id}>
                         <div className='border border-grey mb-12'> 
                         <div >
-                            <img src={item.image} className="relative h-[290px] w-96 bg-no-repeat " />
+                            <img src={item.image} className="relative h-[290px] w-full bg-no-repeat " />
                             <p className={`absolute top-0 right-0 text-white py-2 px-3 ${item.availability ? 'bg-green-600' : 'bg-red-600'}`}>
                                 {item.availability ? 'Available' : 'Unavailable'}
                             </p>
                         </div>
-                        <div>
-                            <p className='font-bold '>{item.description}</p>
+                        <div className='p-4'>
+                            <p className='font-bold text-xl mb-2'>{item.description}</p>
+                            <div className='flex'>
+                            <MdLocalOffer />
+                            <p className='font-bold text-red-600 text-[12px]'>{item.specialOffer}</p>
+                            </div>
                             <Link to={`/allrooms/${item._id}`}><button className='bg-[#4D7377] py-2 px-3 text-white my-3 rounded-xl'>Book Now</button></Link>
                         </div>
                         </div>

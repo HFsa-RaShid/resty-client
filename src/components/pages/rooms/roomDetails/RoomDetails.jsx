@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import {  useParams } from "react-router-dom";
+import {  Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
@@ -100,6 +100,7 @@ const RoomDetails = () => {
                     <h1>{room.description}</h1>
                     <p>Price per Night: ${room.pricePerNight}</p>
                     <p>Room Size: {room.roomSize}</p>
+                    <p>Room Number: {room.roomNumber}</p>
                     <p>Availability: {room.availability ? 'Available' : 'Not Available'}</p>
                     <p>Special Offers: {room.specialOffer}</p>
                     <DatePicker 
@@ -111,6 +112,10 @@ const RoomDetails = () => {
                     <div>
                     <button onClick={handleBookNow}>Book Now</button>
                     </div>
+
+                    <Link to={`/reviewForRoom/${room.roomNumber}`}>
+                        <button>See Reviews</button>
+                    </Link>
                 </div>
             </div>
         </div>

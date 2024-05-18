@@ -25,7 +25,11 @@ const FeaturedRooms = () => {
     }, []);
 
     return (
-        <div className="h-[500px] container mx-auto my-10">
+        <div className="h-[600px] container mx-auto my-10 ">
+            <h1 className='text-center text-3xl font-bold mb-4'>FEATURED ROOM</h1>
+            <div className='w-[550px] mx-auto mb-8 text-center'>
+                <p>Experience the epitome of hospitality as you explore our collection of featured rooms, each designed to exceed your expectations.</p>
+            </div>
             <Swiper
             
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -41,15 +45,17 @@ const FeaturedRooms = () => {
             >
                 {rooms.map(item => (
                     <SwiperSlide key={item._id}>
+                        <div className='border border-grey mb-12'> 
                         <div >
-                        <img src={item.image} className="relative h-[290px] w-96 bg-no-repeat " />
-                        <p className={`absolute top-0 right-0 text-white py-2 px-3 ${item.availability ? 'bg-green-600' : 'bg-red-600'}`}>
-                            {item.availability ? 'Available' : 'Unavailable'}
-                        </p>
+                            <img src={item.image} className="relative h-[290px] w-96 bg-no-repeat " />
+                            <p className={`absolute top-0 right-0 text-white py-2 px-3 ${item.availability ? 'bg-green-600' : 'bg-red-600'}`}>
+                                {item.availability ? 'Available' : 'Unavailable'}
+                            </p>
                         </div>
-                        <div className='border border-grey mb-10'>
-                        <p >{item.description}</p>
-                        <Link><button className=''>Book Now</button></Link>
+                        <div>
+                            <p className='font-bold '>{item.description}</p>
+                            <Link to={`/allrooms/${item._id}`}><button className='bg-[#4D7377] py-2 px-3 text-white my-3 rounded-xl'>Book Now</button></Link>
+                        </div>
                         </div>
                         
                     </SwiperSlide>

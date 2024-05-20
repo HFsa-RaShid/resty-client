@@ -58,6 +58,7 @@ const MyBookings = () => {
             rating: 1,
             roomId: '',
             roomNumber: '',
+            userPhoto: user?.photoURL || '',
         });
     };
 
@@ -69,7 +70,8 @@ const MyBookings = () => {
             rating: review.rating,
             comment: review.comment,
             timestamp: new Date().toISOString(),
-            roomId: selectedItem.room._id
+            roomId: selectedItem.room._id,
+            userPhoto: user.photoURL,
         };
 
         fetch(`http://localhost:8000/reviews`, {
@@ -205,7 +207,7 @@ const MyBookings = () => {
                     <form onSubmit={handleReviewSubmit}>
                         <button type="button" onClick={closeModal} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         <h3 className="font-bold text-lg">Post Review</h3>
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label className="block text-sm font-bold mb-2" htmlFor="username">Username</label>
                             <input
                                 id="username"
@@ -217,7 +219,7 @@ const MyBookings = () => {
                             />
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label className="block text-sm font-bold mb-2" htmlFor="roomNumber">Room Number</label>
                             <input
                                 id="roomNumber"
@@ -228,7 +230,7 @@ const MyBookings = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black bg-white"
                             />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label className="block text-sm font-bold mb-2" htmlFor="rating">Rating</label>
                             <input
                                 id="rating"
@@ -242,7 +244,7 @@ const MyBookings = () => {
                             />
                         </div>
 
-                        <div className="mb-4">
+                        <div className="mb-2">
                             <label className="block text-sm font-bold mb-2" htmlFor="comment">Comment</label>
                             <textarea
                                 id="comment"
@@ -254,13 +256,13 @@ const MyBookings = () => {
                             />
                         </div>
 
-                        <div className="mb-4">
-                            <label className="block text-sm font-bold mb-2" htmlFor="timestamp">Timestamp</label>
-                            <Timestamp date={new Date()} className="block text-black" />
+                        <div className="mb-2">
+                            <label className="block text-sm  font-bold mb-2" htmlFor="timestamp">Timestamp</label>
+                            <Timestamp date={new Date()} className="block  text-[#72a8a7]" />
                         </div>
 
                         <div className="modal-action">
-                            <button type="submit" className="btn">Submit</button>
+                            <button type="submit" className="px-4 py-2 text-white rounded-xl bg-[#7FBCBB]">Submit</button>
                         </div>
                     </form>
                 </div>

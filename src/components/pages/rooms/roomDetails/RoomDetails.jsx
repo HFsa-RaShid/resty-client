@@ -24,6 +24,7 @@ const RoomDetails = () => {
 
     const handleBookNow = () => {
         if (room.availability) {
+            const formattedDate = startDate.toLocaleDateString();
             Swal.fire({
                 title: 'Booking Confirmation',
                 
@@ -31,6 +32,7 @@ const RoomDetails = () => {
                    `Room Description: ${room.description}<br>
                    Price per Night: ${room.pricePerNight}<br>
                    Room Size: ${room.roomSize}<br>
+                   Selected Date: ${formattedDate}<br>
                    Special Offers: ${room.specialOffer}<br><br>
                    Are you sure you want to book this room?`,
                 

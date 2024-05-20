@@ -1,35 +1,40 @@
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../../provider/AuthProvider';
+
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Timestamp from '../reviewForRoom/Timestamp';
 
 
 const ReviewForRoom = () => {
-    const { user } = useContext(AuthContext);
+    
     const { roomNo } = useParams();
-    const [room, setRoom] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         fetch(`http://localhost:8000/reviewForRoom`)
             .then(res => res.json())
             .then(data => {
-                const filteredReviews = data.filter(review => review.room_number === roomNo);
-                setRoom(filteredReviews);
-             
+                // console.log(data)
+                const filteredReviews = data.filter(review => review.roomNumber === parseInt(roomNo));
+                // console.log(filteredReviews)
+                setReviews(filteredReviews);
             })
-    }, [roomNo]);
-
+            
+    }, [roomNo]); 
 
     return (
-        <div>
-            <h2>Reviews for Room {roomNo}</h2>
+        <div className='container mx-auto w-[50%] text-center my-10'>
+            <h2 className='text-2xl font-bold mb-4'>Reviews for Room {roomNo}</h2>
+           
             <ul>
-                {room.map(review => (
-                    <li key={review._id}>
-                        <p>User: {review.user_name}</p>
+                {reviews.map(review => (
+                    <div key={review._id} className='w-full mx-auto border mb-4 text-center'>
+                        <p><Timestamp date={review.timestamp} /></p>
+                        <p>User: {review.username}</p>
                         <p>Rating: {review.rating}</p>
                         <p>Comment: {review.comment}</p>
-                        {/* Add other review details here */}
-                    </li>
+                        
+                 
+                    </div>
                 ))}
             </ul>
 
@@ -38,4 +43,5 @@ const ReviewForRoom = () => {
     );
 };
 
-export default ReviewForRoom;
+export default ReviewForRoom; 
+

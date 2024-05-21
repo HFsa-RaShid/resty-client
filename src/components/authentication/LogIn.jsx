@@ -126,23 +126,15 @@ const handleGithubLogIn = () =>{
               </label>
               </div>
               <div className="form-control mt-2">
-              <button className="btn bg-black text-white font-bold">Sign In</button>
+              <button className="border py-2 bg-black rounded-xl text-white font-bold">Sign In</button>
               </div>
               
               <p className="text-center font-bold text-white">OR</p>
-              <div className="flex justify-around">
-                <div className="border flex py-2 px-3 bg-black text-white rounded-xl gap-3 items-center w-[45%] pl-7">
+             
+                <div className="border flex py-2 px-3 bg-black text-white rounded-xl gap-1 items-center pl-[38%]">
                     <FcGoogle />
-                    <button onClick={handleGoogleLogIn} className="font-bold text-[18px]">Google</button>
+                    <button onClick={handleGoogleLogIn} className=" font-bold text-[18px]">Google</button>
                 </div>
-                <div className="border flex py-2 px-3 bg-black text-white rounded-xl gap-3 items-center w-[45%] pl-7">
-                    <FaGithub />
-                    <button onClick={handleGithubLogIn} className="font-bold text-[18px]">Github</button>
-
-                </div>
-                    
-                    
-              </div>
               
           </form>
           

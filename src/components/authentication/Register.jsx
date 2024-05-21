@@ -117,7 +117,7 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="form-control mt-2">
-                        <button className="btn bg-black text-white font-bold">Register</button>
+                        <button className="border py-2 rounded-xl bg-black text-white font-bold">Register</button>
                         </div>
                 
             

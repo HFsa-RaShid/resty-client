@@ -41,6 +41,62 @@ const ContactUs = () => {
 
                 </div>
 
+                <div>
+                <div className="border p-6 rounded-lg shadow-lg w-full max-w-4xl">
+                            
+                            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block ">First Name</label>
+                                <input
+                                type="text"
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                                placeholder="First Name"
+                                />
+                            </div>
+                            <div>
+                                <label className="block ">Last Name</label>
+                                <input
+                                type="text"
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                                placeholder="Last Name"
+                                />
+                            </div>
+                            <div>
+                                <label className="block ">Email</label>
+                                <input
+                                type="email"
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                                placeholder="abc@example.com"
+                                />
+                            </div>
+                            <div>
+                                <label className="block ">Phone</label>
+                                <input
+                                type="tel"
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                                placeholder="+880 1376324894"
+                                />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block ">Message</label>
+                                <textarea
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                                rows="4"
+                                placeholder="Your message here..."
+                                ></textarea>
+                            </div>
+                            <div className="md:col-span-2">
+                                <button
+                                type="submit"
+                                className="w-full p-2 bg-[#4D7377] text-white rounded-md hover:bg-[#315155] transition duration-200"
+                                >
+                                Send Message
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                </div>
+
             </div>
         </div>
             

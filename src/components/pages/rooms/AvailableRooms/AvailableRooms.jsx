@@ -60,7 +60,7 @@ const AvailableRooms = () => {
 
     return (
         <div className="container mx-auto my-10">
-            <h2 className="text-center text-3xl text-black font-bold mb-6">AVAILABLE ROOMS</h2>
+            <h2 className="text-center text-3xl font-bold mb-6">AVAILABLE ROOMS</h2>
 
             <div className="flex justify-center mb-6">
                 <input 

@@ -41,9 +41,9 @@ const AboutUs = () => {
             <div className="w-[45%]">
                 
                 <div className="relative">
-                <img src="https://i.ibb.co/d2hfHGt/mountain.jpg" className="w-full h-[400px]" />
+                <img src="https://i.ibb.co/d2hfHGt/mountain.jpg" className="w-full h-[300px]" />
                  <div className="absolute border-white  w-[80%]  top-[80%] left-[10%] border-8">
-                 <img src="https://i.ibb.co/Y2KhX1c/family-room.jpg" className="w-full h-[250px]" />
+                 <img src="https://i.ibb.co/Y2KhX1c/family-room.jpg" className="w-full h-[200px]" />
                  </div>
                 </div>
                 

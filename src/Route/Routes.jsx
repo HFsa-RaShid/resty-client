@@ -9,6 +9,8 @@ import RoomDetails from "../components/pages/rooms/roomDetails/RoomDetails";
 import MyBookings from "../components/pages/mybookings/MyBookings";
 import UpdateBookingInfo from "../components/pages/mybookings/UpdateBookingInfo";
 import ReviewForRoom from "../components/pages/rooms/reviewForRoom/ReviewForRoom";
+import AboutUs from "../components/pages/aboutUs/AboutUs";
+import ContactUs from "../components/pages/contactUs/ContactUs";
 
 
 
@@ -58,6 +60,16 @@ export const router = createBrowserRouter([
         {
           path: "/reviewForRoom/:roomNo",
           element: <ReviewForRoom></ReviewForRoom>,
+          
+        },
+        {
+          path: "/aboutUs",
+          element: <AboutUs></AboutUs>,
+          
+        },
+        {
+          path: "/contactUs",
+          element: <ContactUs></ContactUs>,
           
         },
         

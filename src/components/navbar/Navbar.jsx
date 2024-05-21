@@ -64,10 +64,10 @@ const Navbar = () => {
                         } to='/myBookingsPage'>My Bookings</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/myCraft'>About Us</NavLink></li>
+                        } to='/aboutUs'>About Us</NavLink></li>
                         <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/myCraft'>Contact Us</NavLink></li>
+                        } to='/contactUs'>Contact Us</NavLink></li>
             
             
             </ul>
@@ -91,10 +91,10 @@ const Navbar = () => {
                         } to='/myBookingsPage'>My Bookings</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/myCraft'>About Us</NavLink></li>
+                        } to='/aboutUs'>About Us</NavLink></li>
             <li><NavLink className={({ isActive }) =>
                             isActive ? 'text-black bg-white ' : ' '
-                        } to='/myCraft'>Contact Us</NavLink></li>
+                        } to='/contactUs'>Contact Us</NavLink></li>
             
            
           </ul>

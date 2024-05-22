@@ -6,7 +6,7 @@ const ErrorPage = () => {
     
     return (
         
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-screen bg-white">
             <img src="https://i.ibb.co/1syBJdB/2658093.webp" alt="" />
             <p className="text-lg text-gray-600 mb-6 ">
                 The page you are looking for does not exist.

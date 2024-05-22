@@ -15,8 +15,10 @@ const SpecialOffersModal = ({ isOpen, onRequestClose }) => {
     >
       <div
         className="relative bg-cover bg-center p-8 rounded-lg shadow-lg w-full"
-        style={{ backgroundImage: `url('https://i.ibb.co/5ksqTmR/popup.jpg')` }} 
+        style={{ backgroundImage: `url('https://i.ibb.co/qjTK1nw/360-F-303114640-6-T1y-BVn3h-Hi-T3m1g-Gkrp-LKNe2-ICNt-RMp.jpg')` }} 
+        
       >
+ 
         <button
           onClick={onRequestClose}
           className="absolute top-3 right-3 text-gray-300"
@@ -26,7 +28,8 @@ const SpecialOffersModal = ({ isOpen, onRequestClose }) => {
         </button>
 
         <div className=''>
-            <img src={logo} className='w-20 h-16 mx-auto'  />
+            <img src={logo} className='w-20 h-16 mx-auto '  />
+            
         </div>
             
             <div className="mx-auto text-center text-white">
@@ -42,11 +45,15 @@ const SpecialOffersModal = ({ isOpen, onRequestClose }) => {
                            <Link className='underline'>Click here </Link>
                             <p className=''> for full terms & conditions.</p>
                            </div>
+
+                           <p className="mt-2">Exclusive deals for members.</p>
+
                            
                     </div>
+                   
                 <div>
                 
-                <p className="mt-2">Exclusive deals for members.</p>
+                
                 </div>
             </div>
       </div>

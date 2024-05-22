@@ -11,6 +11,8 @@ import UpdateBookingInfo from "../components/pages/mybookings/UpdateBookingInfo"
 import ReviewForRoom from "../components/pages/rooms/reviewForRoom/ReviewForRoom";
 import AboutUs from "../components/pages/aboutUs/AboutUs";
 import ContactUs from "../components/pages/contactUs/ContactUs";
+import PrivateRoute from "./PrivateRoute";
+
 
 
 
@@ -49,7 +51,7 @@ export const router = createBrowserRouter([
         },
         {
           path: "/myBookingsPage",
-          element: <MyBookings></MyBookings>,
+          element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
           
         },
         {
@@ -62,6 +64,12 @@ export const router = createBrowserRouter([
           element: <ReviewForRoom></ReviewForRoom>,
           
         },
+        {
+          path: "/reviewForRoom/:roomNo",
+          element: <RoomDetails></RoomDetails>,
+          
+        },
+     
         {
           path: "/aboutUs",
           element: <AboutUs></AboutUs>,

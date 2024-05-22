@@ -4,6 +4,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp"; 
+import moment from 'moment';
 
 const MyBookings = () => {
     const { user } = useContext(AuthContext) || {};
@@ -101,54 +102,66 @@ const MyBookings = () => {
        
     };
 
-    // cancel booking
 
-    const handleDelete = _id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Cancel Booking!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`http://localhost:8000/myBookings/${_id}`, {
-                    method: 'DELETE',
-                    body: JSON.stringify({ email: user.email }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                title: "Canceled!",
-                                text: "Your booking has been cancelled.",
-                                icon: "success"
-                            });
-                            setControl(!control);
-                            fetch(`http://localhost:8000/allrooms/${_id}`, {
-                                method: 'PUT',
-                                body: JSON.stringify({ availability: true }),
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Error!",
-                                text: "Failed to cancel booking.",
-                                icon: "error"
-                            });
+    // cancel booking
+    const handleDelete = (_id, selectedDate) => {
+        const oneDayBeforeSelectedDate = moment(selectedDate).subtract(1, 'days');
+
+        const today = moment();
+    
+        if (today.isBefore(oneDayBeforeSelectedDate)) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Cancel Booking!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`http://localhost:8000/myBookings/${_id}`, {
+                        method: 'DELETE',
+                        body: JSON.stringify({ email: user.email }),
+                        headers: {
+                            'Content-Type': 'application/json'
                         }
                     })
-                   
-            }
-        });
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: "Canceled!",
+                                    text: "Your booking has been cancelled.",
+                                    icon: "success"
+                                });
+                                setControl(!control);
+                                fetch(`http://localhost:8000/allrooms/${_id}`, {
+                                    method: 'PUT',
+                                    body: JSON.stringify({ availability: true }),
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Failed to cancel booking.",
+                                    icon: "error"
+                                });
+                            }
+                        })
+                }
+            });
+        } else {
+            Swal.fire({
+                title: "Cannot Cancel!",
+                text: "You can only cancel bookings one day before the selected date.",
+                icon: "warning"
+            });
+        }
     };
+    
 
     return (
         <div className="container mx-auto my-10 min-h-screen">
@@ -186,8 +199,12 @@ const MyBookings = () => {
                                     </td>
                                     <td className="px-6 py-4 font-bold">
                                         <Link to={`/updatedInfo/${item._id}`}><button className="ml-4 text-blue-600 hover:text-blue-800">Update</button></Link>
-                                        <button onClick={() => handleDelete(item._id)} className="ml-4 text-red-800 hover:text-red-900">Cancel</button>
+                                        
+                                        <button onClick={() => handleDelete(item._id, item.selectedDate)} className="ml-4 text-red-800 hover:text-red-900">Cancel</button>
+
                                         <button onClick={() => openModal(item)} className="ml-4 text-blue-600 hover:text-blue-800">Post Review</button>
+
+                                        
                                     </td>
                                 </tr>
                             )) : (

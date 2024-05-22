@@ -3,6 +3,8 @@ import Banner from "./banner/Banner";
 import FeaturedRooms from "./featuredRooms/FeaturedRooms";
 import NewsLetter from "./newsletter/NewsLetter";
 import SpecialOffersModal from "./specialOffersModal/SpecialOffersModal";
+import AllReviews from "./reviews/AllReviews";
+import Mappp from "./map/Mappp";
 
 
 const Home = () => {
@@ -22,9 +24,10 @@ const Home = () => {
             <SpecialOffersModal isOpen={isModalOpen} onRequestClose={closeModal} />
             <Banner></Banner>
        
-            
+            <Mappp></Mappp>
             <FeaturedRooms></FeaturedRooms>
             <NewsLetter></NewsLetter>
+            <AllReviews></AllReviews>
             
         </div>
     );

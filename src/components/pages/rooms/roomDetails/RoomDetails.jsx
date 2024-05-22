@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import {  Link, useParams } from "react-router-dom";
+import {  Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
@@ -10,6 +10,7 @@ const RoomDetails = () => {
     const { id } = useParams();
     const [room, setRoom] = useState({});
     const [startDate, setStartDate] = useState(new Date());
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         fetch(`http://localhost:8000/allrooms/${id}`)
@@ -22,7 +23,29 @@ const RoomDetails = () => {
             });
     }, [id]);
 
+
+    const { roomNo } = useParams();
+    const [reviews, setReviews] = useState([]);
+
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/reviewForRoom`)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                const filteredReviews = data.filter(review => review.roomNumber === parseInt(roomNo));
+                // console.log(filteredReviews)
+                setReviews(filteredReviews);
+            })
+            
+    }, [roomNo]); 
+
     const handleBookNow = () => {
+        if (!user) {
+            // If user is not logged in, navigate to login page
+            navigate('/login');
+            return;
+        }
         if (room.availability) {
             const formattedDate = startDate.toLocaleDateString();
             Swal.fire({
@@ -96,27 +119,32 @@ const RoomDetails = () => {
             <div className="flex gap-10">
       
                 <div className="w-[45%] ">
-                    <img src={room.image} className="w-[90%] h-[500px] mx-auto" alt="Room" />
+                    <img src={room.image} className="w-[90%] h-[450px] mx-auto" alt="Room" />
                 </div>
                 <div className="w-[55%] ">
-                    <h1>{room.description}</h1>
-                    <p>Price per Night: ${room.pricePerNight}</p>
-                    <p>Room Size: {room.roomSize}</p>
-                    <p>Room Number: {room.roomNumber}</p>
-                    <p>Availability: {room.availability ? 'Available' : 'Not Available'}</p>
-                    <p>Special Offers: {room.specialOffer}</p>
+                    <h1 className="text-2xl font-semibold ">{room.description}</h1>
+                    <p className="my-3">Price per Night: ${room.pricePerNight}</p>
+                    <p className="my-3">Room Size: {room.roomSize}</p>
+                    <p className="my-3">Room Number: {room.roomNumber}</p>
+                    <p className="my-3">Availability: {room.availability ? 'Available' : 'Not Available'}</p>
+                    <p className="my-3">Special Offers: {room.specialOffer}</p>
+                    <div className="flex gap-2 items-center">
+                    <p className="my-3">Select Date:</p>
                     <DatePicker 
                         selected={startDate} 
                         onChange={(date) => setStartDate(date)} 
                         className="border border-black"
                         dateFormat="yyyy-MM-dd"
                     />
+                    </div>
                     <div>
-                    <button onClick={handleBookNow}>Book Now</button>
+                    <button onClick={handleBookNow} className="my-4 py-2 px-4 bg-[#4D7377] text-white rounded-xl">Book Now</button>
                     </div>
 
+                    {/* <p>{reviews.length}</p> */}
+
                     <Link to={`/reviewForRoom/${room.roomNumber}`}>
-                        <button>See Reviews</button>
+                        <button className="underline text-blue-600">See Reviews</button>
                     </Link>
                 </div>
             </div>
@@ -125,3 +153,4 @@ const RoomDetails = () => {
 };
 
 export default RoomDetails;
+

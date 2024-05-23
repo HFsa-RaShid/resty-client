@@ -10,7 +10,7 @@ const SpecialOffersModal = ({ isOpen, onRequestClose }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="relative bg-white rounded-lg shadow-lg max-w-lg mx-auto mt-20"
+      className="relative bg-white rounded-lg shadow-lg w-[400px]  mx-auto mt-48 lg:mt-28 md:mt-40"
       overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
     >
       <div

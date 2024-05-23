@@ -1,18 +1,31 @@
 import { useContext, useEffect, useState } from "react";
-import {  Link, useNavigate, useParams } from "react-router-dom";
+import {  Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
 import { MdLocalOffer } from "react-icons/md";
+
 import "react-datepicker/dist/react-datepicker.css";
-
-
 const RoomDetails = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const [room, setRoom] = useState({});
     const [startDate, setStartDate] = useState(new Date());
-    const navigate = useNavigate(); 
+
+    const [reviews, setReviews] = useState([]);
+
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/reviewForRoom`)
+            .then(res => res.json())
+            .then(data => {
+                
+                const filteredReviews = data.filter(review => review.roomNumber === room.roomNumber);
+                // console.log(filteredReviews)
+                setReviews(filteredReviews);
+            })
+            
+    }, [room.roomNumber]); 
 
     useEffect(() => {
         fetch(`http://localhost:8000/allrooms/${id}`)
@@ -25,29 +38,7 @@ const RoomDetails = () => {
             });
     }, [id]);
 
-
-    const { roomNo } = useParams();
-    const [reviews, setReviews] = useState([]);
-
-
-    useEffect(() => {
-        fetch(`http://localhost:8000/reviewForRoom`)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data)
-                const filteredReviews = data.filter(review => review.roomNumber === parseInt(roomNo));
-                // console.log(filteredReviews)
-                setReviews(filteredReviews);
-            })
-            
-    }, [roomNo]); 
-
     const handleBookNow = () => {
-        if (!user) {
-            // If user is not logged in, navigate to login page
-            navigate('/login');
-            return;
-        }
         if (room.availability) {
             const formattedDate = startDate.toLocaleDateString();
             Swal.fire({
@@ -118,26 +109,26 @@ const RoomDetails = () => {
 
     return (
         <div className="my-10">
-            <div className="flex gap-10">
+             <div className="md:flex gap-10">
       
-                <div className="w-[45%] ">
-                    <img src={room.image} className="w-[90%] h-[450px] mx-auto" alt="Room" />
-                </div>
-                <div className="w-[55%] ">
+                 <div className="lg:w-[45%] ">
+                     <img src={room.image} className="w-[90%] h-[450px] mx-auto" alt="Room" />
+                 </div>
+                 <div className="w-[90%] lg:w-[55%] mx-auto">
                     <h1 className="text-2xl font-semibold ">{room.description}</h1>
-                    <p className="my-3">Price per Night: ${room.pricePerNight}</p>
-                    <p className="my-3">Room Size: {room.roomSize}</p>
+                     <p className="my-3">Price per Night: ${room.pricePerNight}</p>
+                     <p className="my-3">Room Size: {room.roomSize}</p>
                     <p className="my-3">Room Number: {room.roomNumber}</p>
-                    <p className="my-3">Availability: {room.availability ? 'Available' : 'Not Available'}</p>
+                     <p className="my-3">Availability: {room.availability ? 'Available' : 'Not Available'}</p>
                     
-                    <div className='flex items-center'>
+                     <div className='flex items-center'>
                             <MdLocalOffer />
-                            <p className='font-bold text-red-600 '>{room.specialOffer}</p>
-                            </div>
+                             <p className='font-bold text-red-600 '>{room.specialOffer}</p>
+                             </div>
                     
                     
                     <div className="flex gap-2 items-center">
-                    <p className="my-3">Select Date:</p>
+                     <p className="my-3">Select Date:</p>
                     <DatePicker 
                         selected={startDate} 
                         onChange={(date) => setStartDate(date)} 
@@ -149,24 +140,16 @@ const RoomDetails = () => {
                     <button onClick={handleBookNow} className="my-4 py-2 px-4 bg-[#4D7377] text-white rounded-xl">Book Now</button>
                     </div>
 
-                    {/* <p>{reviews.length}</p> */}
-
-                    {/* <Link to={`/reviewForRoom/${room.roomNumber}`}>
-                        <button className="underline text-blue-600">See Reviews</button>
-                    </Link>
-                    <Link to={`/PostReview/${room.roomNumber}`}>
-                        <button className="underline text-blue-600">Post Reviews</button>
-                    </Link> */}
-
                     {reviews.length > 0 ? (
                         <Link to={`/reviewForRoom/${room.roomNumber}`}>
-                            <button className="underline text-blue-600">See Reviews</button>
+                            <button className="mr-4 py-2 px-4 bg-[#4D7377] text-white rounded-2xl">See Reviews</button>
                         </Link>
                     ) : (
                         <p>No reviews yet.</p>
                     )}
+
                     <Link to={`/PostReview/${room.roomNumber}`}>
-                        <button className="underline text-blue-600">Post Reviews</button>
+                        <button className="py-2 px-4 bg-[#4D7377] text-white rounded-2xl">Post Reviews</button>
                     </Link>
                 </div>
             </div>
@@ -175,5 +158,3 @@ const RoomDetails = () => {
 };
 
 export default RoomDetails;
-
-

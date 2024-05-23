@@ -1,10 +1,10 @@
 
-
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../../../../provider/AuthProvider";
+
 import Timestamp from "../reviewForRoom/Timestamp"; 
 import Swal from 'sweetalert2'; 
+import { AuthContext } from "../../../../provider/AuthProvider";
 
 const PostReview = () => {
     const { user } = useContext(AuthContext);
@@ -40,12 +40,14 @@ const PostReview = () => {
         .then(res => res.json())
         .then(data => {
             if (data.insertedId) {
-               
                 Swal.fire({
                     title: "Submitted!",
                     text: "Your review has been submitted.",
                     icon: "success"
                 });
+                // Clear the form
+                setRating(1);
+                setComment("");
             } else {
                 Swal.fire({
                     title: "Error!",
@@ -54,34 +56,31 @@ const PostReview = () => {
                 });
             }
         })
-   
-};
-    
+       
+    };
     
     return (
         <div className="max-w-md mx-auto mt-8">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div className="mb-2">
-                            <label className="block text-sm font-bold mb-2" htmlFor="username">Username</label>
-                            <input
-                                id="username"
-                                type="text"
-                                value={user?.displayName || ""}
-                                readOnly
-                                name="user_name"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-white leading-tight focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
+                <div className="mb-2">
+                    <label className="block text-sm font-bold mb-2" htmlFor="username">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        value={user?.displayName || ""}
+                        readOnly
+                        name="user_name"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-white leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                </div>
                 <div className="">
                     <label className="block text-sm font-bold mb-2">Room Number:</label>
-                    <input type="text" value={roomNo} className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-white leading-tight focus:outline-none focus:shadow-outline"/>
-          
+                    <input type="text" value={roomNo} className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-white leading-tight focus:outline-none focus:shadow-outline" readOnly />
                 </div>
-                
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Rating:</label>
+                    <label className="block  text-sm font-bold mb-2">Rating:</label>
                     <input 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none text-black bg-white border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         type="number" 
                         min="1" 
                         max="5" 
@@ -92,12 +91,11 @@ const PostReview = () => {
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Comment:</label>
                     <textarea 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black bg-white leading-tight focus:outline-none focus:shadow-outline"
                         value={comment} 
                         onChange={handleCommentChange} 
                     />
                 </div>
-
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Timestamp:</label>
                     <div className="text-[#72a8a7]">
@@ -118,6 +116,4 @@ const PostReview = () => {
 };
 
 export default PostReview;
-
-
 

@@ -22,9 +22,7 @@ const AllReviews = () => {
     return (
         <div className="h-[600px] container mx-auto my-10 ">
         <h1 className='text-center text-3xl font-bold my-10'>REVIEWS</h1>
-        {/* <div className='w-[550px] mx-auto mb-8 text-center'>
-            <p>Experience the epitome of hospitality as you explore our collection of featured rooms, each designed to exceed your expectations.</p>
-        </div> */}
+      
         <Swiper
         
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -35,6 +33,12 @@ const AllReviews = () => {
         pagination={{ clickable: true }}
        
         spaceBetween={10} 
+
+        breakpoints={{
+            425: { slidesPerView: 1, spaceBetween: 10 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 30 },
+        }}
         className="my-swiper"
             
         >
@@ -48,6 +52,7 @@ const AllReviews = () => {
                         <img src="https://i.ibb.co/N6pc4Wh/Quotation-Mark-PNG-Picture.png"  className="w-[50px] h-[40px] "/>
 
                         </div>
+                        <p>Room No: <span>{item.roomNumber}</span></p>
                         <p className="text-[15px]">{item.comment}</p>
                         
                     </div>

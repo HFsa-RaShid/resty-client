@@ -7,8 +7,8 @@ const ContactUs = () => {
     return (
         <div className="container mx-auto my-10">
             <h1 className="text-3xl font-bold text-center my-8">CONTACT US</h1>
-            <div className="w-[80%] mx-auto flex gap-20">
-                <div className="w-[50%] h-[450px] relative">
+            <div className="w-[80%] mx-auto lg:flex gap-20">
+                <div className="lg:w-[50%] h-[450px] relative mb-6">
                     <img src="https://i.ibb.co/dpWv4kX/5-107.jpg" className="w-full h-full" />
                     <div className="absolute bg-black bg-opacity-50 bottom-0">
                         <div className="flex text-white p-5 gap-6">

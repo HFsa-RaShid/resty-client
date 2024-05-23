@@ -4,7 +4,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import 'animate.css';
 import logo from '../../assets/image/logo.png'
 import { Tooltip } from 'react-tooltip'
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Navbar = () => {
@@ -135,24 +134,7 @@ const Navbar = () => {
                   
                         <button onClick={handleSignOut} className="py-2 px-4  rounded-xl font-bold border border-white text-[12px] lg:text-[18px]">Sign Out</button>
 
-                        <div className="relative inline-block group ">
-                  <button className="mt-2 text-[18px] md:text-2xl" ><BsThreeDotsVertical /></button>
-                    <ul className="menu bg-gray-200 w-56 rounded-lg absolute hidden top-0 right-0 mt-6 group-hover:block text-black">
-                      
-                        <li><Link to='/userProfile' className="block px-4 py-2 text-gray-800 hover:bg-gray-400">
-                        My Profile
-                        </Link></li>
-                        <li><Link to='' className="block px-4 py-2 text-gray-800 hover:bg-gray-400">
-                          Settings
-                        </Link></li>
-                        
-                    </ul>
-                </div>
-
                     </div>
-
-                    
-                
 
                 :
                     <div className="flex gap-2 animate__animated animate__fadeInRight ">
@@ -162,13 +144,6 @@ const Navbar = () => {
 
               }
 
-                
-
-
-
-
-              
-              
             </div>
             </div>
            

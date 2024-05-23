@@ -53,15 +53,15 @@ const UpdateBookingInfo = () => {
                     });
                 }
             })
-            .catch(error => console.error('Error updating data:', error)); // Catch fetch errors
+            
     };
 
     return (
         <div className='my-20'>
-            <form ref={formRef} onSubmit={handleUpdate}  className='h-[200px] w-[50%] mx-auto border'>
-                <div className='p-20'>
+            <form ref={formRef} onSubmit={handleUpdate}  className='h-[180px] md:h-[220px] w-[80%] md:w-[50%] mx-auto border'>
+                <div className='p-4 md:p-20'>
                     <div className='mb-6'>
-                        <label htmlFor="datePicker" className='mr-6'>Select Date:</label>
+                        <label htmlFor="datePicker" className='mr-6 text-2xl font-bold '>Select Date:</label>
                         <DatePicker
                             id="datePicker"
                             className='border border-black'
@@ -70,7 +70,7 @@ const UpdateBookingInfo = () => {
                             dateFormat="yyyy-MM-dd"
                         />
                     </div>
-                    <button type="submit">Update Date</button>
+                    <button type="submit" className="mr-4 py-2 px-4 bg-[#4D7377] text-white rounded-2xl">Update Date</button>
                 </div>
             </form>
         </div>

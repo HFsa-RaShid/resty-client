@@ -45,24 +45,6 @@ const LogIn = () => {
   }
 //   google login end
 
-// github login start
-const githubProvider = new GithubAuthProvider();
-const handleGithubLogIn = () =>{
-    signInWithPopup(auth,githubProvider)
-    .then(result =>{
-        const loggedUser = result.user;
-        // console.log(loggedUser);
-        setUser(loggedUser);
-        toast.success('Logged In successfully');
-        setTimeout(() => {
-            navigate(location?.state ? location.state : '/')
-        }, 1000);
-    })
-    .catch(error =>{
-        console.log('error',error.message);
-    })
-}
-// github login end
 
 //email & password  
 
@@ -92,17 +74,19 @@ const handleGithubLogIn = () =>{
 
 
     return (
-      <div className="hero " style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${registerBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="min-h-screen " style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://i.ibb.co/VHQx4j8/narrow-hallway-181624-187.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <Helmet>
                 <title>Sign In | RestY</title>
         </Helmet>
+
         
-        <div className="hero-content flex-col w-[400px] md:w-[500px] ">
+       <div className="container mx-auto ">
+       <div className="hero-content  flex-col lg:flex-row-reverse  w-[400px]  md:w-[500px] mx-auto lg:mx-0">
           
-          <h1 className="text-5xl font-bold text-white">Sign In now!</h1>
+          <h1 className="text-5xl font-bold text-white text-center lg:text-left">Sign In now!</h1>
           
-          <div className="card animate__animated animate__zoomIn shrink-0 w-full max-w-sm shadow-2xl bg-black opacity-95 border">
-          <form className="card-body" onSubmit={handleLogin} >
+          <div className="card animate__animated animate__zoomIn shrink-0 w-full max-w-sm shadow-2xl bg-black opacity-95 border mt-10">
+          <form className="card-body " onSubmit={handleLogin} >
               <div className="form-control">
               <label className="label">
                   <span className="label-text font-bold text-white">Email</span>
@@ -144,6 +128,7 @@ const handleGithubLogIn = () =>{
           </div>
           
       </div>
+       </div>
       
       <ToastContainer />
       

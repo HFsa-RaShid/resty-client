@@ -29,7 +29,7 @@ const FeaturedRooms = () => {
     return (
         <div className="h-[600px] container mx-auto my-10 ">
             <h1 className='text-center text-3xl font-bold mb-4'>FEATURED ROOM</h1>
-            <div className='w-[550px] mx-auto mb-8 text-center'>
+            <div className='w-[400px] md:w-[550px] mx-auto mb-8 text-center'>
                 <p>Experience the epitome of hospitality as you explore our collection of featured rooms, each designed to exceed your expectations.</p>
             </div>
             <Swiper
@@ -42,6 +42,11 @@ const FeaturedRooms = () => {
             pagination={{ clickable: true }}
            
             spaceBetween={30} 
+            breakpoints={{
+                425: { slidesPerView: 1, spaceBetween: 10 },
+                768: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+            }}
             className="my-swiper"
                 
             >

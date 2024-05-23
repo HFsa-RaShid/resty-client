@@ -24,7 +24,7 @@ const ReviewForRoom = () => {
     }, [roomNo]); 
 
     return (
-        <div className='container mx-auto w-[50%]  my-10'>
+        <div className='container mx-auto w-[90%] md:w-[70%] lg:w-[50%]  my-10'>
             <h2 className='text-2xl text-center font-bold mb-4'>Reviews for Room {roomNo}</h2>
            
            

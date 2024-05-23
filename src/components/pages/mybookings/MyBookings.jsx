@@ -13,11 +13,11 @@ const MyBookings = () => {
     const [control, setControl] = useState(false);
     const [review, setReview] = useState({
         username: user?.displayName || '',
+        roomNumber: '',
         rating: 1,
         comment: '',
         timestamp: new Date().toISOString(),
-        roomId: '',
-        roomNumber: '',
+        
     });
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -45,7 +45,6 @@ const MyBookings = () => {
         setSelectedItem(item);
         setReview({
             ...review,
-            roomId: item.room._id,
             roomNumber: item.room.roomNumber,
         });
         document.getElementById('my_modal_3').showModal();
@@ -55,10 +54,9 @@ const MyBookings = () => {
         document.getElementById('my_modal_3').close();
         setReview({
             ...review,
-            comment: '',
-            rating: 1,
-            roomId: '',
             roomNumber: '',
+            rating: 1,
+            comment: '',
             userPhoto: user?.photoURL || '',
         });
     };
@@ -71,7 +69,6 @@ const MyBookings = () => {
             rating: review.rating,
             comment: review.comment,
             timestamp: new Date().toISOString(),
-            roomId: selectedItem.room._id,
             userPhoto: user.photoURL,
         };
 
@@ -171,9 +168,9 @@ const MyBookings = () => {
                 </div>
             ) : (
                 <div className="container mx-auto">
-                    <table className="w-full">
+                    <table className=" w-[90%] mx-auto">
                         <thead className="bg-[#7FBCBB]">
-                            <tr className="text-xs font-bold text-black uppercase">
+                            <tr className="text-[12px] font-bold text-black uppercase">
                                 <th className="px-6 py-3 text-left">Photo</th>
                                 <th className="px-6 py-3 text-left">Description</th>
                                 <th className="px-6 py-3 text-left">Selected Date</th>
@@ -183,10 +180,10 @@ const MyBookings = () => {
                         <tbody className="bg-[#B8DADC] text-black">
                             {items.length > 0 ? items.map(item => (
                                 <tr key={item._id}>
-                                    <td className="px-6 py-4">
+                                    <td className="px-3 md:px-6 py-4">
                                         <img src={item.room.image} alt={item.room.description} className="h-16 w-16" />
                                     </td>
-                                    <td className="px-6 py-4 text-black">
+                                    <td className="px-3 md:px-6 py-4 text-black">
                                         <div className="font-semibold">
                                             {item.room.description}
                                         </div>
@@ -194,17 +191,21 @@ const MyBookings = () => {
                                             Price: ${item.room.pricePerNight}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-3 md:px-6 py-4">
                                         {new Date(item.selectedDate).toLocaleDateString()}
                                     </td>
-                                    <td className="px-6 py-4 font-bold">
+                                    <td className="px-3 md:px-6 py-4 font-bold">
+                                        <div >
                                         <Link to={`/updatedInfo/${item._id}`}><button className="ml-4 text-blue-600 hover:text-blue-800">Update</button></Link>
-                                        
+                                       
+                                        </div>
+                                        <div>
                                         <button onClick={() => handleDelete(item._id, item.selectedDate)} className="ml-4 text-red-800 hover:text-red-900">Cancel</button>
-
+                                        </div>
+                                        <div>
                                         <button onClick={() => openModal(item)} className="ml-4 text-blue-600 hover:text-blue-800">Post Review</button>
-
-                                        
+                                        </div>
+ 
                                     </td>
                                 </tr>
                             )) : (
@@ -224,7 +225,7 @@ const MyBookings = () => {
                     <form onSubmit={handleReviewSubmit}>
                         <button type="button" onClick={closeModal} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         <h3 className="font-bold text-lg">Post Review</h3>
-                        <div className="mb-2">
+                        <div className="mb-1">
                             <label className="block text-sm font-bold mb-2" htmlFor="username">Username</label>
                             <input
                                 id="username"
@@ -236,7 +237,7 @@ const MyBookings = () => {
                             />
                         </div>
 
-                        <div className="mb-2">
+                        <div className="mb-1">
                             <label className="block text-sm font-bold mb-2" htmlFor="roomNumber">Room Number</label>
                             <input
                                 id="roomNumber"
@@ -247,7 +248,7 @@ const MyBookings = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black bg-white"
                             />
                         </div>
-                        <div className="mb-2">
+                        <div className="mb-1">
                             <label className="block text-sm font-bold mb-2" htmlFor="rating">Rating</label>
                             <input
                                 id="rating"
@@ -261,7 +262,7 @@ const MyBookings = () => {
                             />
                         </div>
 
-                        <div className="mb-2">
+                        <div className="mb-1">
                             <label className="block text-sm font-bold mb-2" htmlFor="comment">Comment</label>
                             <textarea
                                 id="comment"
@@ -273,7 +274,7 @@ const MyBookings = () => {
                             />
                         </div>
 
-                        <div className="mb-2">
+                        <div className="mb-1">
                             <label className="block text-sm  font-bold mb-2" htmlFor="timestamp">Timestamp</label>
                             <Timestamp date={new Date()} className="block  text-[#72a8a7]" />
                         </div>

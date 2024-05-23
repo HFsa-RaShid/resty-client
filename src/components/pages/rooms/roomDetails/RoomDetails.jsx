@@ -3,8 +3,10 @@ import {  Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
-
+import { MdLocalOffer } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
+
+
 const RoomDetails = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
@@ -127,7 +129,13 @@ const RoomDetails = () => {
                     <p className="my-3">Room Size: {room.roomSize}</p>
                     <p className="my-3">Room Number: {room.roomNumber}</p>
                     <p className="my-3">Availability: {room.availability ? 'Available' : 'Not Available'}</p>
-                    <p className="my-3">Special Offers: {room.specialOffer}</p>
+                    
+                    <div className='flex items-center'>
+                            <MdLocalOffer />
+                            <p className='font-bold text-red-600 '>{room.specialOffer}</p>
+                            </div>
+                    
+                    
                     <div className="flex gap-2 items-center">
                     <p className="my-3">Select Date:</p>
                     <DatePicker 
@@ -143,8 +151,22 @@ const RoomDetails = () => {
 
                     {/* <p>{reviews.length}</p> */}
 
-                    <Link to={`/reviewForRoom/${room.roomNumber}`}>
+                    {/* <Link to={`/reviewForRoom/${room.roomNumber}`}>
                         <button className="underline text-blue-600">See Reviews</button>
+                    </Link>
+                    <Link to={`/PostReview/${room.roomNumber}`}>
+                        <button className="underline text-blue-600">Post Reviews</button>
+                    </Link> */}
+
+                    {reviews.length > 0 ? (
+                        <Link to={`/reviewForRoom/${room.roomNumber}`}>
+                            <button className="underline text-blue-600">See Reviews</button>
+                        </Link>
+                    ) : (
+                        <p>No reviews yet.</p>
+                    )}
+                    <Link to={`/PostReview/${room.roomNumber}`}>
+                        <button className="underline text-blue-600">Post Reviews</button>
                     </Link>
                 </div>
             </div>
@@ -153,4 +175,5 @@ const RoomDetails = () => {
 };
 
 export default RoomDetails;
+
 

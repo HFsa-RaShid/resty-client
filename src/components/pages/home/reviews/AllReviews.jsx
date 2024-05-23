@@ -40,7 +40,7 @@ const AllReviews = () => {
         >
             {reviews.map(item => (
                 <SwiperSlide key={item._id}>
-                    <div className='bg-[#b2e6de] shadow-lg mb-12 h-[400px] text-black rounded-xl'> 
+                    <div className='bg-[#D3E5E2] shadow-lg mb-12 h-[400px] text-black rounded-xl'> 
 
                     <div className=" p-3 h-[80%]">
                         
@@ -48,7 +48,7 @@ const AllReviews = () => {
                         <img src="https://i.ibb.co/N6pc4Wh/Quotation-Mark-PNG-Picture.png"  className="w-[50px] h-[40px] "/>
 
                         </div>
-                        <p className="text-[14px]">{item.comment}</p>
+                        <p className="text-[15px]">{item.comment}</p>
                         
                     </div>
                     <div className="flex gap-2 p-3">

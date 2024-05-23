@@ -56,7 +56,7 @@ const FeaturedRooms = () => {
                         </div>
                         <div className='p-4'>
                             <p className='font-bold text-xl mb-2'>{item.description}</p>
-                            <div className='flex'>
+                            <div className='flex items-center'>
                             <MdLocalOffer />
                             <p className='font-bold text-red-600 text-[12px]'>{item.specialOffer}</p>
                             </div>

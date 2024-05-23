@@ -12,6 +12,7 @@ import ReviewForRoom from "../components/pages/rooms/reviewForRoom/ReviewForRoom
 import AboutUs from "../components/pages/aboutUs/AboutUs";
 import ContactUs from "../components/pages/contactUs/ContactUs";
 import PrivateRoute from "./PrivateRoute";
+import PostReview from "../components/pages/rooms/roomDetails/PostReview";
 
 
 
@@ -67,6 +68,11 @@ export const router = createBrowserRouter([
         {
           path: "/reviewForRoom/:roomNo",
           element: <RoomDetails></RoomDetails>,
+          
+        },
+        {
+          path: "/PostReview/:roomNo",
+          element: <PrivateRoute><PostReview></PostReview></PrivateRoute>,
           
         },
      

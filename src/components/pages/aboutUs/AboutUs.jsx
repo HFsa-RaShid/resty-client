@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet";
 
 
 const AboutUs = () => {
     return (
         <div className="container mx-auto my-10  min-h-screen">
+            <Helmet>
+                <title>About Us | RestY</title>
+        </Helmet>
             <h1 className="text-3xl font-bold text-center my-10">ABOUT US</h1>
             
             <div className="lg:flex gap-20 w-[80%] mx-auto">

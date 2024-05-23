@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Timestamp from "../reviewForRoom/Timestamp"; 
 import Swal from 'sweetalert2'; 
 import { AuthContext } from "../../../../provider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const PostReview = () => {
     const { user } = useContext(AuthContext);
@@ -61,6 +62,9 @@ const PostReview = () => {
     
     return (
         <div className="max-w-md mx-auto mt-8">
+            <Helmet>
+                <title>Post Review | RestY</title>
+        </Helmet>
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-2">
                     <label className="block text-sm font-bold mb-2" htmlFor="username">Username</label>

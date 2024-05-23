@@ -2,10 +2,14 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { Helmet } from "react-helmet";
 
 const ContactUs = () => {
     return (
         <div className="container mx-auto my-10">
+            <Helmet>
+                <title>Contact Us | RestY</title>
+        </Helmet>
             <h1 className="text-3xl font-bold text-center my-8">CONTACT US</h1>
             <div className="w-[80%] mx-auto lg:flex gap-20">
                 <div className="lg:w-[50%] h-[450px] relative mb-6">

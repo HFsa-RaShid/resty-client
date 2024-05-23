@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Timestamp from '../reviewForRoom/Timestamp';
 
 import { FaStar } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
 
 const ReviewForRoom = () => {
     
@@ -25,6 +26,9 @@ const ReviewForRoom = () => {
 
     return (
         <div className='container mx-auto w-[90%] md:w-[70%] lg:w-[50%]  my-10'>
+            <Helmet>
+                <title>Reviews | RestY</title>
+        </Helmet>
             <h2 className='text-2xl text-center font-bold mb-4'>Reviews for Room {roomNo}</h2>
            
            

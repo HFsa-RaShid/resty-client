@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp"; 
 import moment from 'moment';
+import { Helmet } from "react-helmet";
 
 const MyBookings = () => {
     const { user } = useContext(AuthContext) || {};
@@ -162,6 +163,9 @@ const MyBookings = () => {
 
     return (
         <div className="container mx-auto my-10 min-h-screen">
+            <Helmet>
+                <title>MyBookings | RestY</title>
+        </Helmet>
             {loading ? (
                 <div className="flex justify-center items-center h-screen">
                     <span className="loading loading-spinner loading-lg"></span>

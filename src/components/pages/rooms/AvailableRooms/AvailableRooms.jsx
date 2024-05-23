@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AvailableRoomsCard from "./AvailableRoomsCard";
+import { Helmet } from "react-helmet";
 
 const AvailableRooms = () => {
     const [items, setItems] = useState([]);
@@ -60,6 +61,9 @@ const AvailableRooms = () => {
 
     return (
         <div className="container mx-auto my-10">
+            <Helmet>
+                <title>Available Room | RestY</title>
+        </Helmet>
             <h2 className="text-center text-3xl font-bold mb-6">AVAILABLE ROOMS</h2>
 
             <div className="flex justify-center mb-6">

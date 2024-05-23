@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Helmet } from 'react-helmet';
 
 const UpdateBookingInfo = () => {
     const { id } = useParams();
@@ -58,6 +59,9 @@ const UpdateBookingInfo = () => {
 
     return (
         <div className='my-20'>
+            <Helmet>
+                <title>Update Booking | RestY</title>
+        </Helmet>
             <form ref={formRef} onSubmit={handleUpdate}  className='h-[180px] md:h-[220px] w-[80%] md:w-[50%] mx-auto border'>
                 <div className='p-4 md:p-20'>
                     <div className='mb-6'>

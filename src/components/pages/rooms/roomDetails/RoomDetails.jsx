@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { MdLocalOffer } from "react-icons/md";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { Helmet } from "react-helmet";
 const RoomDetails = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
@@ -109,6 +110,9 @@ const RoomDetails = () => {
 
     return (
         <div className="my-10">
+            <Helmet>
+                <title>Room Details | RestY</title>
+        </Helmet>
              <div className="md:flex gap-10">
       
                  <div className="lg:w-[45%] ">

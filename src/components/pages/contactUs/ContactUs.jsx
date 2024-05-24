@@ -3,15 +3,23 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Helmet } from "react-helmet";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const ContactUs = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
+
     return (
         <div className="container mx-auto my-10">
             <Helmet>
                 <title>Contact Us | RestY</title>
         </Helmet>
             <h1 className="text-3xl font-bold text-center my-8">CONTACT US</h1>
-            <div className="w-[80%] mx-auto lg:flex gap-20">
+            <div className="w-[80%] mx-auto lg:flex gap-20" data-aos = "fade-up">
                 <div className="lg:w-[50%] h-[450px] relative mb-6">
                     <img src="https://i.ibb.co/dpWv4kX/5-107.jpg" className="w-full h-full" />
                     <div className="absolute bg-black bg-opacity-50 bottom-0">

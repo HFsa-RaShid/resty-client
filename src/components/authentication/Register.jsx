@@ -1,18 +1,21 @@
 
-import { useContext, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import registerBackground from '../../assets/image/slide5.jpg'
 import { updateProfile } from "firebase/auth";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import 'animate.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
-        
+
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
 
     const {createUser} = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +23,9 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleRegister = e =>{
+
+       
+
         e.preventDefault();
         const form = new FormData(e.currentTarget)
         const name = form.get('name');
@@ -74,7 +80,7 @@ const Register = () => {
         </Helmet>
 
             <div className="container mx-auto">
-            <div className="hero-content flex-col lg:flex-row-reverse w-[400px] md:w-[500px] animate__animated animate__zoomIn mx-auto lg:mx-0">
+            <div className="hero-content flex-col lg:flex-row-reverse w-[400px] md:w-[500px] mx-auto lg:mx-0" data-aos="fade-left">
             
             <h1 className="text-4xl font-bold text-white">Register Here!</h1>
         

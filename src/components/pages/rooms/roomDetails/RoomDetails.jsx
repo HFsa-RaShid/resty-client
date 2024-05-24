@@ -7,7 +7,14 @@ import { MdLocalOffer } from "react-icons/md";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet } from "react-helmet";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const RoomDetails = () => {
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
+
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const [room, setRoom] = useState({});
@@ -114,11 +121,11 @@ const RoomDetails = () => {
     };
 
     return (
-        <div className="my-10">
+        <div className="my-10" >
             <Helmet>
                 <title>Room Details | RestY</title>
         </Helmet>
-             <div className="md:flex gap-10">
+             <div className="md:flex gap-10" data-aos = "fade-up">
       
                  <div className="lg:w-[45%] ">
                      <img src={room.image} className="w-[90%] h-[450px] mx-auto" alt="Room" />

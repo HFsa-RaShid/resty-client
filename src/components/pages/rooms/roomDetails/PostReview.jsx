@@ -1,13 +1,19 @@
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Timestamp from "../reviewForRoom/Timestamp"; 
 import Swal from 'sweetalert2'; 
 import { AuthContext } from "../../../../provider/AuthProvider";
 import { Helmet } from "react-helmet";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const PostReview = () => {
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []); 
+
     const { user } = useContext(AuthContext);
     const { roomNo } = useParams();
     const [startDate, setStartDate] = useState(new Date());
@@ -65,7 +71,7 @@ const PostReview = () => {
             <Helmet>
                 <title>Post Review | RestY</title>
         </Helmet>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" data-aos = "fade-up">
                 <div className="mb-2">
                     <label className="block text-sm font-bold mb-2" htmlFor="username">Username</label>
                     <input

@@ -2,9 +2,17 @@ import { Map, Marker } from "pigeon-maps"
 import { PiAirplaneTiltFill } from "react-icons/pi";
 import { GiCargoShip } from "react-icons/gi";
 import { FaCarAlt } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const Mappp = () => {
+
+  useEffect(() => {
+    AOS.init({duration: 2000});
+}, []);
+
   return (
-    <div className="container mx-auto lg:flex gap-20 my-20">
+    <div className="container mx-auto lg:flex gap-20 my-20" data-aos = "fade-up">
       <div className="w-[90%] lg:w-[60%] mx-auto lg:mx-0">
       <Map height={420} defaultCenter={[22.7033, 90.3415]} defaultZoom={11}>
       <Marker width={50} anchor={[22.7033, 90.3415]} />

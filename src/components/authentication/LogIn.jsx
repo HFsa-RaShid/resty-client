@@ -1,21 +1,24 @@
-import { useContext,  useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import registerBackground from '../../assets/image/slide5.jpg'
+import {  GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import 'animate.css';
 import { Helmet } from "react-helmet";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 import app from "../../Firebase/firebaseinfo.config";
 import { AuthContext } from "../../provider/AuthProvider";
 
 
 
 const LogIn = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
 
             const {signInUser}=useContext(AuthContext)
             const [showPassword, setShowPassword] = useState(false);
@@ -81,11 +84,11 @@ const LogIn = () => {
 
         
        <div className="container mx-auto ">
-       <div className="hero-content  flex-col lg:flex-row-reverse  w-[400px]  md:w-[500px] mx-auto lg:mx-0">
+       <div className="hero-content  flex-col lg:flex-row-reverse  w-[400px]  md:w-[500px] mx-auto lg:mx-0" data-aos="fade-left">
           
           <h1 className="text-5xl font-bold text-white text-center lg:text-left">Sign In now!</h1>
           
-          <div className="card animate__animated animate__zoomIn shrink-0 w-full max-w-sm shadow-2xl bg-black opacity-95 border mt-10">
+          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-black opacity-95 border mt-10">
           <form className="card-body " onSubmit={handleLogin} >
               <div className="form-control">
               <label className="label">

@@ -1,8 +1,15 @@
-
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const NewsLetter = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
+
     return (
-        <div className="my-10 container mx-auto">
+        <div className="my-10 container mx-auto" data-aos = "fade-up">
             <div className="w-[90%] md:w-[80%] lg:w-2/3 mx-auto bg-[#D3E5E2] h-[410px] md:h-[300px] text-black">
                 <h1 className="text-3xl md:text-4xl font-bold text-center py-6 md:py-10">Join Our Newsletter</h1>
                 <p className="text-xl px-20 font-medium">Get weekly access to our best deals,tips & tricks</p>

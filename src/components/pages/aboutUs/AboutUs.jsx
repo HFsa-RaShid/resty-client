@@ -1,7 +1,14 @@
 import { Helmet } from "react-helmet";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const AboutUs = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
+
     return (
         <div className="container mx-auto my-10  min-h-screen">
             <Helmet>
@@ -9,7 +16,7 @@ const AboutUs = () => {
         </Helmet>
             <h1 className="text-3xl font-bold text-center my-10">ABOUT US</h1>
             
-            <div className="lg:flex gap-20 w-[80%] mx-auto">
+            <div className="lg:flex gap-20 w-[80%] mx-auto" data-aos = "fade-up">
             <div className="lg:w-[55%]">
                 
                 <p ><span className="text-2xl font-semibold ">W</span>elcome to RestY – your ultimate destination for seamless hotel bookings and unforgettable stays. At RestY, we believe that travel should be a joy from the moment you start planning. Our mission is to simplify the booking process and connect you with the best accommodations to make every trip a memorable experience.</p>

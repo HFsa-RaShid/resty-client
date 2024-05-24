@@ -5,6 +5,7 @@ import NewsLetter from "./newsletter/NewsLetter";
 import SpecialOffersModal from "./specialOffersModal/SpecialOffersModal";
 import AllReviews from "./reviews/AllReviews";
 import Mappp from "./map/Mappp";
+import { Helmet } from "react-helmet";
 
 
 const Home = () => {
@@ -21,6 +22,9 @@ const Home = () => {
     
     return (
         <div>
+          <Helmet>
+                <title>Home | RestY</title>
+        </Helmet>
             <SpecialOffersModal isOpen={isModalOpen} onRequestClose={closeModal} />
             <Banner></Banner>
        

@@ -5,11 +5,17 @@ import Timestamp from '../reviewForRoom/Timestamp';
 
 import { FaStar } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ReviewForRoom = () => {
     
     const { roomNo } = useParams();
     const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
 
 
     useEffect(() => {
@@ -33,7 +39,7 @@ const ReviewForRoom = () => {
            
            
                 {reviews.map(review => (
-                    <div key={review._id} className='p-3 w-full mx-auto border mb-4 '>
+                    <div key={review._id} className='p-3 w-full mx-auto border mb-4 'data-aos = "fade-up">
 
                        <div className="flex gap-2 mb-2 ">
                         <div className=" w-12 h-12 rounded-full border border-black">

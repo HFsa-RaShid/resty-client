@@ -4,8 +4,14 @@ import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Helmet } from 'react-helmet';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const UpdateBookingInfo = () => {
+    useEffect(() => {
+        AOS.init({duration: 2000});
+    }, []);
+
     const { id } = useParams();
     const [myBookings, setMyBookings] = useState({});
     const [control, setControl] = useState(false);
@@ -61,11 +67,11 @@ const UpdateBookingInfo = () => {
     };
 
     return (
-        <div className='my-20'>
+        <div className='my-20' data-aos = "fade-up">
             <Helmet>
                 <title>Update Booking | RestY</title>
         </Helmet>
-            <form ref={formRef} onSubmit={handleUpdate}  className='h-[180px] md:h-[220px] w-[80%] md:w-[50%] mx-auto border'>
+            <form ref={formRef} onSubmit={handleUpdate}  className='h-[180px] md:h-[220px] w-[80%] md:w-[50%] mx-auto border' data-aos = "fade-up">
                 <div className='p-4 md:p-20'>
                     <div className='mb-6'>
                         <label htmlFor="datePicker" className='mr-6 text-2xl font-bold '>Select Date:</label>

@@ -12,7 +12,7 @@ const AllReviews = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8000/reviewForRoom`)
+        fetch(`https://resty-server.vercel.app/reviewForRoom`)
             .then(res => res.json())
             .then(data => {
                 setReviews(data);
@@ -44,7 +44,7 @@ const AllReviews = () => {
         >
             {reviews.map(item => (
                 <SwiperSlide key={item._id}>
-                    <div className='bg-[#D3E5E2] shadow-lg mb-12 h-[400px] text-black rounded-xl'> 
+                    <div className='bg-[#D3E5E2] shadow-lg mb-12 h-[380px] text-black rounded-xl'> 
 
                     <div className=" p-3 h-[80%]">
                         

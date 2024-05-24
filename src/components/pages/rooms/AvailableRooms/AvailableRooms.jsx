@@ -15,7 +15,7 @@ const AvailableRooms = () => {
     
     useEffect(() => {
         setLoading(true);
-        let url = "http://localhost:8000/allrooms";
+        let url = "https://resty-server.vercel.app/allrooms";
         if (minPrice || maxPrice) {
             url += `?minPrice=${minPrice}&maxPrice=${maxPrice}`;
         }
@@ -35,7 +35,7 @@ const AvailableRooms = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            let url = "http://localhost:8000/allrooms";
+            let url = "https://resty-server.vercel.app/allrooms";
             if (minPrice || maxPrice) {
                 url += `?minPrice=${minPrice}&maxPrice=${maxPrice}`;
             }

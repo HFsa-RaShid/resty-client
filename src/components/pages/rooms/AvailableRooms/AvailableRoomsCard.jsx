@@ -6,7 +6,7 @@ const AvailableRoomsCard = ({ allrooms }) => {
     const [room, setRoom] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8000/reviewForRoom/roomNumber/${roomNumber}`)
+        fetch(`https://resty-server.vercel.app/reviewForRoom/roomNumber/${roomNumber}`)
             .then(res => res.json())
             .then(data => {
                 

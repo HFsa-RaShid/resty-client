@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import {  Link, useParams } from "react-router-dom";
+import {  Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
@@ -12,12 +12,13 @@ const RoomDetails = () => {
     const { id } = useParams();
     const [room, setRoom] = useState({});
     const [startDate, setStartDate] = useState(new Date());
+    const navigate = useNavigate();
 
     const [reviews, setReviews] = useState([]);
 
 
     useEffect(() => {
-        fetch(`http://localhost:8000/reviewForRoom`)
+        fetch(`https://resty-server.vercel.app/reviewForRoom`)
             .then(res => res.json())
             .then(data => {
                 
@@ -29,7 +30,7 @@ const RoomDetails = () => {
     }, [room.roomNumber]); 
 
     useEffect(() => {
-        fetch(`http://localhost:8000/allrooms/${id}`)
+        fetch(`https://resty-server.vercel.app/allrooms/${id}`)
             .then(res => res.json())
             .then(data => {
                 setRoom(data);
@@ -40,7 +41,11 @@ const RoomDetails = () => {
     }, [id]);
 
     const handleBookNow = () => {
-        if (room.availability) {
+        if (!user) {
+            navigate('/login');
+           
+        }
+        else if (room.availability) {
             const formattedDate = startDate.toLocaleDateString();
             Swal.fire({
                 title: 'Booking Confirmation',
@@ -59,7 +64,7 @@ const RoomDetails = () => {
                 cancelButtonText: 'No, cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:8000/myBookings`, {
+                    fetch(`https://resty-server.vercel.app/myBookings`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -74,7 +79,7 @@ const RoomDetails = () => {
                     .then(data => {
                         if (data.success) {
                             
-                            fetch(`http://localhost:8000/allrooms/${id}`, {
+                            fetch(`https://resty-server.vercel.app/allrooms/${id}`, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json'

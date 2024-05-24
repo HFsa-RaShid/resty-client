@@ -31,7 +31,7 @@ const PostReview = () => {
             userPhoto: user.photoURL,
         };
     
-        fetch(`http://localhost:8000/reviews`, {
+        fetch(`https://resty-server.vercel.app/reviews`, {
             method: 'POST',
             body: JSON.stringify(newReview),
             headers: {

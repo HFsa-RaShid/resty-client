@@ -29,7 +29,7 @@ const MyBookings = () => {
         }
 
         setLoading(true);
-        fetch(`http://localhost:8000/myBookings/email/${user.email}`, { credentials: 'include' })
+        fetch(`https://resty-server.vercel.app/myBookings/email/${user.email}`, { credentials: 'include' })
             .then((res) => res.json())
             .then(data => {
                 setItems(Array.isArray(data) ? data : []);
@@ -73,7 +73,7 @@ const MyBookings = () => {
             userPhoto: user.photoURL,
         };
 
-        fetch(`http://localhost:8000/reviews`, {
+        fetch(`https://resty-server.vercel.app/reviews`, {
             method: 'POST',
             body: JSON.stringify(newReview),
             headers: {
@@ -118,7 +118,7 @@ const MyBookings = () => {
                 confirmButtonText: "Yes, Cancel Booking!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:8000/myBookings/${_id}`, {
+                    fetch(`https://resty-server.vercel.app/myBookings/${_id}`, {
                         method: 'DELETE',
                         body: JSON.stringify({ email: user.email }),
                         headers: {
@@ -134,7 +134,7 @@ const MyBookings = () => {
                                     icon: "success"
                                 });
                                 setControl(!control);
-                                fetch(`http://localhost:8000/allrooms/${_id}`, {
+                                fetch(`https://resty-server.vercel.app/allrooms/${_id}`, {
                                     method: 'PUT',
                                     body: JSON.stringify({ availability: true }),
                                     headers: {

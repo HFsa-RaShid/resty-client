@@ -13,7 +13,7 @@ const ReviewForRoom = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8000/reviewForRoom`)
+        fetch(`https://resty-server.vercel.app/reviewForRoom`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -37,7 +37,7 @@ const ReviewForRoom = () => {
 
                        <div className="flex gap-2 mb-2 ">
                         <div className=" w-12 h-12 rounded-full border border-black">
-                            <img src={review.userPhoto} className='rounded-full' />
+                            <img src={review.userPhoto} className='rounded-full w-full h-full' />
                             
                         </div>
                         

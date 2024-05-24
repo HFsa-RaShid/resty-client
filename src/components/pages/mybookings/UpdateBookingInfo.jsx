@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,10 +10,11 @@ const UpdateBookingInfo = () => {
     const [myBookings, setMyBookings] = useState({});
     const [control, setControl] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const navigate = useNavigate();
 
     useEffect(() => {
         
-        fetch(`http://localhost:8000/myBookings/${id}`)
+        fetch(`https://resty-server.vercel.app/myBookings/${id}`)
             .then(res => res.json())
             .then(data => {
                 setMyBookings(data);
@@ -29,7 +30,7 @@ const UpdateBookingInfo = () => {
         const updatedDate = { selectedDate };
         // console.log(`Fetching data for booking ID: ${id}`); 
 
-        fetch(`http://localhost:8000/myBookings/${id}`, {
+        fetch(`https://resty-server.vercel.app/myBookings/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,6 +45,8 @@ const UpdateBookingInfo = () => {
                         title: "Success!",
                         text: "Booking Updated Successfully",
                         icon: "success"
+                    }).then(() => {
+                        navigate('/myBookingsPage');
                     });
                     formRef.current.reset();
                 } else {

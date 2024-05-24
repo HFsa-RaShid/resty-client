@@ -13,7 +13,7 @@ const FeaturedRooms = () => {
     const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
-        fetch("http://localhost:8000/allrooms")
+        fetch("https://resty-server.vercel.app/allrooms")
             .then((res) => res.json())
             .then((data) => {
                 const filteredRooms = data.filter(room => room.specialOffer !== "No special offer available");

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import {  Link, useNavigate, useParams } from "react-router-dom";
+import {  Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
@@ -20,6 +20,7 @@ const RoomDetails = () => {
     const [room, setRoom] = useState({});
     const [startDate, setStartDate] = useState(new Date());
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [reviews, setReviews] = useState([]);
 
@@ -49,7 +50,7 @@ const RoomDetails = () => {
 
     const handleBookNow = () => {
         if (!user) {
-            navigate('/login');
+            navigate('/login', { state: { from: location.pathname } });
            
         }
         else if (room.availability) {

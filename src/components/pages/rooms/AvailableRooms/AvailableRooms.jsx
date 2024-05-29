@@ -72,14 +72,14 @@ const AvailableRooms = () => {
                     placeholder="Min Price" 
                     value={minPrice} 
                     onChange={(e) => setMinPrice(e.target.value)} 
-                    className="mr-2 p-2 border rounded"
+                    className="mr-2 p-2 border rounded w-[110px] md:w-[180px]"
                 />
                 <input 
                     type="number" 
                     placeholder="Max Price" 
                     value={maxPrice} 
                     onChange={(e) => setMaxPrice(e.target.value)} 
-                    className="mr-2 p-2 border rounded"
+                    className="mr-2 p-2 border rounded w-[110px] md:w-[180px]"
                 />
             </div>
 

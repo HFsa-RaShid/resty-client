@@ -7,6 +7,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Timestamp from '../../rooms/reviewForRoom/Timestamp'
+import { Rating } from "@smastrom/react-rating";
+import '@smastrom/react-rating/style.css'
+
 const AllReviews = () => {
     const [reviews, setReviews] = useState([]);
 
@@ -46,7 +49,7 @@ const AllReviews = () => {
                 <SwiperSlide key={item._id}>
                     <div className='bg-[#D3E5E2] shadow-lg mb-12 h-[380px] text-black rounded-xl'> 
 
-                    <div className=" p-3 h-[80%]">
+                    <div className=" p-3 h-[70%]">
                         
                         <div className="flex items-end justify-end">
                         <img src="https://i.ibb.co/N6pc4Wh/Quotation-Mark-PNG-Picture.png"  className="w-[50px] h-[40px] "/>
@@ -55,6 +58,13 @@ const AllReviews = () => {
                         <p>Room No: <span>{item.roomNumber}</span></p>
                         <p className="text-[15px]">{item.comment}</p>
                         
+                    </div>
+                    <div className="px-3">
+                        <Rating
+                        style={{ maxWidth: 100 }}
+                        value={item.rating}
+                        readOnly
+                        />
                     </div>
                     <div className="flex gap-2 p-3">
                         <div className=" w-12 h-12 rounded-full border border-black">

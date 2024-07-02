@@ -1,49 +1,50 @@
 # Website Name : RestY
 
-# Assignment_ID: assignment_category_0004
-# [Live URL] (https://ass10-resty-client.web.app/)
+# [Server Github] (https://github.com/HFsa-RaShid/resty-server.git)
 
-# Features:
-# Homepage Design 
-+ Banner: High-quality video showcasing hotel rooms.
-+ Map: Displays the hotel's location.
-+ Newsletter Signup: Encourages users to subscribe for updates and offers.
-+ Featured Rooms: Highlights selected rooms with images, descriptions, and a "Book Now" button.
-+ User Reviews: Authentic reviews displayed, sorted by the latest.
-# User Authentication 
-+ Email and Password Registration: Users can create accounts.
-+ Google Authentication: Users can log in using Google via Firebase.
-# Rooms Page 
-+ Room List: Display of available rooms with images.
-+ Room Details: Redirects to a detailed view upon clicking.
-+ Filter System: Filter rooms by price range on the server side.
-+ Total Reviews: Display the total review count for each room.
-# Room Details Page 
-+ Detailed room information including description, price, size, availability, images, and special offers.
-+ Book Now Button: Allows room booking, ensures room is marked unavailable post-booking.
-+ Reviews Section: Shows reviews or a meaningful message if none.
-+ Date Picker: Allows users to select a booking date.
-+ Booking Confirmation Modal: Displays booking summary and a confirm button.
-# My Bookings Page 
-+ List of rooms booked by the user.
-+ Cancel Booking: Users can cancel with confirmation.
-+ Post Reviews: Users can leave reviews for booked rooms.
-+ Update Booking Date: Users can modify booking dates with confirmation and database update.
-# Review System 
-+ Users can post reviews for rooms they have booked, including username, rating, comment, and timestamp.
-+ Reviews are displayed on the room details page.
-# Access Control 
-+ Non-logged-in users cannot book rooms or post reviews.
-+ Non-logged-in users can view basic room details.
-# 404 Page 
-+ Custom 404 page with an engaging image and a "Back to home" button.
-Packages
-+ Browser Tab Title and Metadata: Implemented with Helmet.
-+ Animation Library: Aos for animations.
-+ Map Library: Pigeon-maps  functionality.
-+ User Reviews Carousel: Display latest reviews prominently.
-+ Special Offers and Promotions: Highlight special deals in a popup/modal on the homepage.
-+ Booking Cancellation: Users can cancel bookings up to 1 day before the booked date. Canceled rooms become available again.
-+ JWT Authentication: Secure token-based authentication for private routes, stored on the client side for email/password and social login.
+# Concept and Problem Solved
+RestYRestY is a user-friendly hotel booking platform designed to make finding and booking accommodations easy and efficient. It addresses the need for an intuitive system that provides room availability, booking options, user reviews, and special offers.
 
-These features ensure a comprehensive, user-friendly hotel booking platform with secure authentication and a responsive design.
+# Key Features
++ Homepage Design
+  + Visual Banner: Images or videos of hotel rooms.
+  + Interactive Map: Displays the hotel's location.
+  + Featured Rooms: Highlights selected rooms with a "Book Now" button.
+  + User Reviews: Shows authentic user ratings and comments.
++ User Authentication
+  + Email/Password Login: Secure account creation and login.
+  + Google Login: Easy login with Google via Firebase.
++ Room Management
+  + Rooms Page: Lists available rooms with price and review filters.
+  + Room Details Page: Detailed room information and booking options.
+  + My Bookings Page: Manage bookings, update dates, and post reviews.
+
+# Technologies Used
+Frontend: HTML, CSS, JavaScript, React.js, Tailwind CSS
+Backend: Node.js, Express.js, MongoDB
+Authentication: Firebase, JWT
+Animations: AOS (Animate on Scroll)
+Mapping: Pigeon-maps
+
+
+# Local Setup Guide
+To run EduConnect locally on your machine, follow these steps:
++ Clone the Client Repository:
+  + git clone https://github.com/HFsa-RaShid/resty-client.git
+  + cd resty-client
+
++ Clone the Client Repository:
+  + git clone https://github.com/HFsa-RaShid/resty-server.git
+  + cd resty-server
+
++ Install Dependencies:
+  + npm install
+
++ Set Environment Variables:
+  + Create a .env file in the root directory and configure necessary environment variables such as database connection URI, JWT secret key, and OAuth credentials.
+
++ Start the Server:
+  + Install nodemon globally (if you haven't already):npm install -g nodemon
+
++ Access the Application:
+  + Open your web browser and navigate to http://localhost:5000  to access the locally running instance of EduConnect.

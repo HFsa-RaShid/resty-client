@@ -1,6 +1,6 @@
 # Website Name : RestY
 
-# [Server Github] (https://github.com/HFsa-RaShid/resty-server.git)
+# [Server Github] (https://github.com/HFsa-RaShid/resty-server)
 
 # Concept and Problem Solved
 RestYRestY is a user-friendly hotel booking platform designed to make finding and booking accommodations easy and efficient. It addresses the need for an intuitive system that provides room availability, booking options, user reviews, and special offers.
